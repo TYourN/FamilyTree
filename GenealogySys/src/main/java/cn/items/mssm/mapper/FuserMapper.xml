@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace:命名空间，用于隔离sql语句 ,namespace等于Mapper接口地址-->
+<!-- #{}表示一个占位符 -->
+<mapper namespace="cn.items.mssm.mapper.FuserMapper">
+    
+    <!-- 判断族人信息是否存在 -->
+    <select id="findUserExit" parameterType="FUserinfoCustom" resultType="int">
+        select count(*) from f_userinfo where UserName=#{username} and PassWord=#{password}
+    </select>
+    
+    <!-- 管理员增加族人的信息：从 -->
+    <insert id="addUserInfo" parameterType="FUserinfoCustom">
+        insert into f_userinfo(?,?,?,?) values(#{username},#{password},#{phone},#{identity})
+    </insert>
+    
+    <!-- 增加族人信息之后找到增加信息的Id：从 -->
+    <select id="findLatestUserInfo" resultType="int">
+        select UserInfoId from f_userinfo ORDER BY UserInfoId DESC LIMIT 0,1
+    </select>
+    
+    <!-- 管理员增加族人的登录信息：主 -->
+    <insert id="addUser" parameterType="FUserCustom">
+        insert into f_user(?,?,?,?) values(#{username},#{password},#{dbid},#{userinfoid})
+    </insert>
+    
+    <!-- 修改族人的所有 个人信息：从-->
+    <update id="updateUserInfo" parameterType="FUserinfoCustom">
+        update f_userinfo
+        <trim prefix="set" suffixOverrides=",">
+            <if test="username!=null and username!=''">UserName=#{username},</if>
+            <if test="password!=null and password!=''">PassWord=#{password},</if>
+            <if test="name!=null and name!=''">Name=#{name},</if>
+            <if test="pic!=null and pic!=''">Pic=#{pic},</if>
+            <if test="address!=null and address!=''">Address=#{address},</if>
+            <if test="age!=null and age!=''">Age=#{age},</if>
+            <if test="sex!=null and sex!=''">Sex=#{sex},</if>
+            <if test="marriage!=null and marriage!=''">Marriage=#{marriage},</if>
+            <if test="phone!=null and phone!=''">Phone=#{phone},</if>
+            <if test="identity!=null and identity!=''">Identity=#{identity},</if>
+        </trim>
+        <where>
+            <if test="userinfoid!=null and userinfoid!=''">
+                and UserInfoId=#{userinfoid}
+            </if>
+        </where>
+    </update>
+    
+    <!-- 修改个人的信息：主 -->
+    <update id="updateUser" parameterType="FUserCustom">
+         update f_user
+         <trim prefix="set" suffixOverrides=",">
+             <if test="username!=null and username!=''">UserName=#{username},</if>
+             <if test="password!=null and password!=''">PassWord=#{password},</if>
+         </trim>
+         <where>
+             <if test="userinfoid!=null and userinfoid!=''">
+                 and UserId=#{userid}
+             </if>
+         </where>
+    </update>
+    
+    <!-- 管理员删除族人:主 -->
+    <delete id="deleteUser" parameterType="int">
+        delete from f_user where UserId=#{userid}
+    </delete>
+    
+    <!-- 管理员删除族人：从 -->
+    <delete id="deleteUserInfo" parameterType="int">
+        delete from f_userinfo where UserInfoId=#{userinfoid}
+    </delete>
+    
+    
+    
+</mapper>

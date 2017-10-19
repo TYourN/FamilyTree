@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace:命名空间，用于隔离sql语句 ,namespace等于Mapper接口地址-->
+<!-- #{}表示一个占位符 -->
+<mapper namespace="cn.items.mssm.mapper.FroleMapper">
+    
+    <!-- 查找所有的角色信息 -->
+    <select id="findRoleInfo" resultType="FRoleCustom">
+        select * from f_role 
+    </select>
+    
+    <!-- 增加角色信息 -->
+    <insert id="addRoleInfo" parameterType="FRoleCustom">
+        insert into f_role(?,?) values(#{title},#{memo})
+    </insert>
+    
+    <!-- 修改角色信息 -->
+    <update id="updateRoleInfo" parameterType="FRoleCustom">
+        update f_role
+        <trim prefix="set" suffixOverrides=",">
+            <if test="title!=null and title!=''">Title=#{title},</if>
+            <if test="memo!=null and memo!=''">Memo=#{memo},</if>
+        </trim>
+        <where>
+            <if test="roleid!=null and roleid!=''">
+                and RoleId=#{roleid}
+            </if>
+        </where>
+    </update>
+    
+    <!-- 删除角色信息 -->
+    <delete id="deleteRoleInfo" parameterType="int">
+        delete from f_role where RoleId=#{roleid}
+    </delete>
+    
+    
+    
+</mapper>

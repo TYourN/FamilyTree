@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace:命名空间，用于隔离sql语句 ,namespace等于Mapper接口地址-->
+<!-- #{}表示一个占位符 -->
+<mapper namespace="cn.items.mssm.mapper.FhomePageMapper">
+    
+    <!-- 获取首页第一页的图片 -->
+    <select id="findFirstPics" resultType="String">
+        select Url from f_pictures where Flag='第一页' LIMIT 0,3 
+    </select>
+    
+    <!-- 根据条件获取首页第二页的的图片 -->
+    <select id="findSecondPic" parameterType="String" resultType="String">
+        select Url from f_pictures where Flag='第二页' and Memo=#{memo} ORDER BY Opertime DESC LIMIT 0,1 
+    </select>
+    
+    <!-- 获取首页新闻界面的数据 -->
+    <select id="findHPNews" resultType="FFamnewsCustom">
+        select NewsId,Memo,Opertime,Url from f_famnews ORDER BY Opertime DESC LIMIT 0,5
+    </select>
+
+</mapper>

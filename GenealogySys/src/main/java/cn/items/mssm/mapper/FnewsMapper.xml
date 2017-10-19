@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace:命名空间，用于隔离sql语句 ,namespace等于Mapper接口地址-->
+<!-- #{}表示一个占位符 -->
+<mapper namespace="cn.items.mssm.mapper.FnewsMapper">
+    
+    <!-- 查找出所有的新闻信息 -->
+    <select id="findAllNews" resultType="FFamnewsCustom">
+        select NewsId,Title,Opertime,Memo from f_famnews ORDER BY Opertime DESC
+    </select>
+    
+    <!-- 查询出一条新闻的具体内容 -->
+    <select id="findNewDety" parameterType="int" resultType="FFamnewsCustom">
+        select Title,Content,Opertime from f_famnews where NewsId=#{newsid}
+    </select>
+</mapper>

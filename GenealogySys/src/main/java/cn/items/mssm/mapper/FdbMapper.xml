@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace:命名空间，用于隔离sql语句 ,namespace等于Mapper接口地址-->
+<!-- #{}表示一个占位符 -->
+<mapper namespace="cn.items.mssm.mapper.FdbMapper">
+    <!-- 查找符合条件的数据库信息 :主-->
+    <select id="findDBCount" parameterType="String" resultType="int">
+        select count(*) as num from f_database where FamTitle like CONCAT('%',#{famtitle},'%')
+    </select>
+    
+    <!-- 插入家族的数据库信息 ：主-->
+    <insert id="addDBInfo" parameterType="FDatabaseCustom">
+        insert into f_database(?,?,?,?,?,?,?) values(#{famtitle},#{famlocal},#{databasekey},#{driverclass},#{url},#{username},#{password})
+    </insert>
+    
+    <!-- 查找出最新添加的一条数据库信息的Id ：主-->
+    <select id="findLatestId" resultType="int">
+        select DatabaseId from f_database ORDER BY DatabaseId DESC LIMIT 0,1
+    </select>
+    
+    <!-- 第一次注册数据库时增加管理员 ：从-->
+    <insert id="addManaFirst" parameterType="FUserinfoCustom">
+        insert into f_userinfo(?,?,?,?) values(#{username},#{password},#{phone},#{identity})
+    </insert>
+    
+    <!-- 查找出最新添加的一条管理员信息的Id：从 -->
+    <select id="findLatestUser" resultType="int">
+        select UserInfoId from f_userinfo ORDER BY UserInfoId DESC LIMIT 0,1
+    </select>
+    
+    <!-- 增加人员的登录信息：主 -->
+    <insert id="addUserInfo" parameterType="FUserCustom">
+        insert into f_user(?,?,?,?) values(#{username},#{password},#{dbid},#{userinfoid})
+    </insert>
+</mapper>
