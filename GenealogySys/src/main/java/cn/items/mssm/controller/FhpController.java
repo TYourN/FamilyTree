@@ -2,6 +2,7 @@ package cn.items.mssm.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
@@ -9,9 +10,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import cn.items.mssm.entity.PicsSave;
 import cn.items.mssm.entity.ResponseUtil;
+import cn.items.mssm.entity.StringUtil;
 import cn.items.mssm.poCustom.FFamnewsCustom;
 import cn.items.mssm.service.FhomePageService;
 import net.sf.json.JSONArray;
@@ -28,6 +32,8 @@ public class FhpController {
 	 */
 	@Resource
 	private FhomePageService fhomePageService;
+	
+	public static PicsSave pics=new PicsSave();
 	
 	//读取首页第一页的图片
 	@RequestMapping("/findFirstPics")
@@ -63,15 +69,22 @@ public class FhpController {
 	}
 	
 	//首页第一页图片的上传
+	@ResponseBody
 	@RequestMapping("/addFirstPics")
-	public String addFirstPics(@RequestParam MultipartFile file,HttpServletResponse res)throws Exception{
+	public String addFirstPics(@RequestParam MultipartFile file,@RequestParam("Flag") String Flag,HttpServletResponse res)throws Exception{
 		//获取图片的文件名
 	    String fileName=file.getOriginalFilename();
 		//获取图片的扩展名
 		String extensionName=fileName.substring(fileName.lastIndexOf(".")+1);
 		//新图片名=获取时间戳+图片扩展名
 		String newFileName=String.valueOf(System.currentTimeMillis())+"."+extensionName;
-		System.out.println(newFileName);
+		
+		pics.saveFile(newFileName, file);
+		String url=pics.saveFileString(newFileName);
+		
+		Map<String, String> map=StringUtil.JudgeFlag(Integer.parseInt(Flag));
+		
+		
 		return null;		
 	}
 }

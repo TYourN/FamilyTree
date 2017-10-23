@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- namespace:命名空间，用于隔离sql语句 ,namespace等于Mapper接口地址-->
 <!-- #{}表示一个占位符 -->
 <mapper namespace="cn.items.mssm.mapper.FhomePageMapper">
-    
+        
     <!-- 获取首页第一页的图片 -->
     <select id="findFirstPics" resultType="String">
         select Url from f_pictures where Flag='第一页' LIMIT 0,3 
@@ -20,5 +20,50 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="findHPNews" resultType="FFamnewsCustom">
         select NewsId,Memo,Opertime,Url from f_famnews ORDER BY Opertime DESC LIMIT 0,5
     </select>
+    
+    <!-- 增加首页第一页、第二页的图片 -->
+    <sql id="key">
+      <trim suffixOverrides=",">
+        <if test="title!=null">
+            Title,
+        </if>
+        <if test="url!=null">
+            Url,
+        </if>
+        <if test="memo!=null">
+            Memo,
+        </if>
+        <if test="opertime!=null">
+            Opertime,
+        </if>
+        <if test="flag!=null">
+            Flag,
+        </if>
+      </trim>
+    </sql>
+    
+    <sql id="value">
+      <trim suffixOverrides=",">
+        <if test="title!=null">
+            #{title},
+        </if>
+        <if test="url!=null">
+            #{url},
+        </if>
+        <if test="memo!=null">
+            #{memo},
+        </if>
+        <if test="opertime!=null">
+            #{opertime},
+        </if>
+        <if test="flag!=null">
+            #{flag},
+        </if>
+      </trim>
+    </sql>
+    
+    <insert id="addFSPics" parameterType="FPicturesCustom">
+        insert into f_pictures(<include refid="key"></include>) values(<include refid="value"></include>)
+    </insert>
 
 </mapper>

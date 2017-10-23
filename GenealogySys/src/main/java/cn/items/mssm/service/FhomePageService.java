@@ -3,7 +3,6 @@ package cn.items.mssm.service;
 import java.util.List;
 
 import cn.items.mssm.poCustom.FFamnewsCustom;
-import cn.items.mssm.poCustom.FPicturesCustom;
 
 public interface FhomePageService {
 
@@ -20,4 +19,6 @@ public interface FhomePageService {
 	public String findSecondPic(String memo) throws Exception;
 	
 	public List<FFamnewsCustom> findHPNews() throws Exception;
+	
+	public int addFSPics(String title,String url,String memo,String flag) throws Exception;
 }

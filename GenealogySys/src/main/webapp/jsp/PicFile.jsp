@@ -10,6 +10,7 @@
 <body>
     <form action="${pageContext.request.contextPath}/fhp/addFirstPics.do" method="post" enctype="multipart/form-data">
       <input type="file" name="file" id="doc" multiple="multiple" style="width:150px;" onchange="javascript:setImagePreviews();" accept="image/*" />
+      <input type="hidden" name="Flag" value="1">
       <input type="submit" name="提交">
     </form> 
     <div id="dd" style=" width:500px;"></div>

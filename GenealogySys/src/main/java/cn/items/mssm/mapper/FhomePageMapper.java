@@ -3,6 +3,7 @@ package cn.items.mssm.mapper;
 import java.util.List;
 
 import cn.items.mssm.poCustom.FFamnewsCustom;
+import cn.items.mssm.poCustom.FPicturesCustom;
 
 public interface FhomePageMapper {
 
@@ -19,4 +20,6 @@ public interface FhomePageMapper {
 	public String findSecondPic(String memo) throws Exception;
 	
 	public List<FFamnewsCustom> findHPNews() throws Exception;
+	
+	public int addFSPics(FPicturesCustom fPicturesCustom) throws Exception;
 }
