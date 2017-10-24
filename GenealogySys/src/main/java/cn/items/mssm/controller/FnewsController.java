@@ -1,5 +1,6 @@
 package cn.items.mssm.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONArray;
 import com.github.pagehelper.PageHelper;
@@ -36,26 +38,25 @@ public class FnewsController {
 	
 	public static TotalPrompt totalPrompt=new TotalPrompt();
 	
+	@ResponseBody
 	@RequestMapping("/findNewsAll")
-	public String findNewsAll(@RequestParam int pages,HttpServletResponse res)throws Exception{
+	public Map<String, Object> findNewsAll(@RequestParam int pages,HttpServletResponse res)throws Exception{
 		PageHelper.startPage(pages, 10);
-		JSONObject jContent=new JSONObject();
+		Map<String, Object> map=new HashMap<>();
 		List<FFamnewsCustom> list=fnewsService.findAllNews();
 		PageInfo<FFamnewsCustom> pageInfo=new PageInfo<FFamnewsCustom>(list);
 		long total=pageInfo.getTotal();
-		jContent.put("pages", total);
-		jContent.put("locate",totalPrompt.newsObject());
-		jContent.put("Content",list);
-		ResponseUtil.write(res,jContent);	
-		return null;		
+		map.put("pages", total);
+		map.put("locate",totalPrompt.newsObject());
+		map.put("Content",list);
+		return map;		
 	}
 	
+	@ResponseBody
 	@RequestMapping("/findNewDety")
-	public String findNewDety(@RequestParam int newsid,HttpServletResponse res)throws Exception{
+	public FFamnewsCustom findNewDety(@RequestParam int newsid,HttpServletResponse res)throws Exception{
 		FFamnewsCustom famnewsCustom=fnewsService.findNewDety(newsid);
 		famnewsCustom.setLocate(totalPrompt.newsObject());
-		JSONObject json=JSONObject.fromObject(famnewsCustom);
-		ResponseUtil.write(res, json);
-		return null;		
+		return famnewsCustom;		
 	}
 }

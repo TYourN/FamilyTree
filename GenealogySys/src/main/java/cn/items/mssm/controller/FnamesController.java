@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.items.mssm.entity.ResponseUtil;
 import cn.items.mssm.poCustom.FFamnamesCustom;
@@ -26,11 +27,10 @@ public class FnamesController {
 	@Resource
 	private FnamesService fnamesService;
 	
+	@ResponseBody
 	@RequestMapping("/findNameDety")
-	public String findNameDety(@RequestParam String title,HttpServletResponse res)throws Exception{
+	public FFamnamesCustom findNameDety(@RequestParam String title,HttpServletResponse res)throws Exception{
 		FFamnamesCustom famnamesCustom=fnamesService.findNameDety(title);
-		JSONObject json=JSONObject.fromObject(famnamesCustom);
-		ResponseUtil.write(res, json);
-		return null;		
+		return famnamesCustom;		
 	}
 }

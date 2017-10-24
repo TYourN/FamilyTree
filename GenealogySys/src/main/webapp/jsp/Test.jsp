@@ -36,7 +36,7 @@
         	 $.ajax({
         		 type:"POST",
         		 contentType:"application/json;charset=UTF-8",
-        		 url:"${pageContext.request.contextPath}/fSname/Test.do",
+        		 url:"${pageContext.request.contextPath}/ftest/Test.do",
         		 data:JSON.stringify(con),
         		 dataType:"json",
         		 success:function(result){

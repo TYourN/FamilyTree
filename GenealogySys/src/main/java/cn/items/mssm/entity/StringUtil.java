@@ -116,4 +116,10 @@ public class StringUtil {
     	}
 		return map; 	
     }
+    
+    //通过分隔符来截取String
+    public static String CutString(String src){
+    	String[] sArray1=src.split("/");
+		return "/"+sArray1[sArray1.length-2]+"/"+sArray1[sArray1.length-1];    	
+    }
 }

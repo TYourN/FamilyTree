@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
 
@@ -40,8 +41,9 @@ public class FdbController {
 	
 	public static String serverId;
 	
+	@ResponseBody
 	@RequestMapping("/addDB")
-	public String addDB(@RequestBody Map<String, String> map ,HttpServletResponse res) throws Exception{
+	public int addDB(@RequestBody Map<String, String> map ,HttpServletResponse res) throws Exception{
 		String FamTitle=map.get(" ");
 		String FamLocal=map.get(" ");
 		int count=fdbService.findDBCount(FamTitle);  //查看数据库标识是否重复
@@ -70,11 +72,8 @@ public class FdbController {
 		int uinfo=fdbService.findLatestUser(serverId);
 		fUserCustom.setUserinfoid(uinfo);	
 		fdbService.addUserInfo(fUserCustom);   //在主库中增加用户信息
-		
-		JSONObject json=new JSONObject();
-		json.put("flag",flag);
-		ResponseUtil.write(res, json);
-		return null;		
+	
+		return flag;		
 	}
 	
 	

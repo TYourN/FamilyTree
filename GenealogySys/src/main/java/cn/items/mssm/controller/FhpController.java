@@ -36,17 +36,17 @@ public class FhpController {
 	public static PicsSave pics=new PicsSave();
 	
 	//读取首页第一页的图片
+	@ResponseBody
 	@RequestMapping("/findFirstPics")
-	public String findFirstPics(HttpServletResponse res)throws Exception{
+	public List<String> findFirstPics(HttpServletResponse res)throws Exception{
 		List<String> list=fhomePageService.findFirstPics();
-		JSONArray array=JSONArray.fromObject(list);
-		ResponseUtil.write(res, array);
-		return null;		
+		return list;		
 	}
 	
 	//读取首页第二页的图片
+	@ResponseBody
 	@RequestMapping("/findSecondPics")
-	public String findSecondPics(HttpServletResponse res)throws Exception{
+	public List<String> findSecondPics(HttpServletResponse res)throws Exception{
 		String PicOne=fhomePageService.findSecondPic("在线编修");
 		String PicTwo=fhomePageService.findSecondPic("随时查看");
 		String PicThree=fhomePageService.findSecondPic("家族圈");
@@ -54,24 +54,21 @@ public class FhpController {
 		list.add(PicOne);
 		list.add(PicTwo);
 		list.add(PicThree);
-		JSONArray array=JSONArray.fromObject(list);
-		ResponseUtil.write(res, array);
-		return null;		
+		return list;		
 	}
 	
 	//获取首页三页的数据
+	@ResponseBody
 	@RequestMapping("/findForthPics")
-	public String findForthPics(HttpServletResponse res)throws Exception{
+	public List<FFamnewsCustom> findForthPics(HttpServletResponse res)throws Exception{
 		List<FFamnewsCustom> list=fhomePageService.findHPNews();
-		JSONArray array=JSONArray.fromObject(list);
-		ResponseUtil.write(res, array);
-		return null;		
+		return list;		
 	}
 	
 	//首页第一页图片的上传
 	@ResponseBody
 	@RequestMapping("/addFirstPics")
-	public String addFirstPics(@RequestParam MultipartFile file,@RequestParam("Flag") String Flag,HttpServletResponse res)throws Exception{
+	public int addFirstPics(@RequestParam MultipartFile file,@RequestParam("Flag") String Flag,HttpServletResponse res)throws Exception{
 		//获取图片的文件名
 	    String fileName=file.getOriginalFilename();
 		//获取图片的扩展名
@@ -84,7 +81,7 @@ public class FhpController {
 		
 		Map<String, String> map=StringUtil.JudgeFlag(Integer.parseInt(Flag));
 		
-		
-		return null;		
+		int flag=fhomePageService.addFSPics("",url,map.get("Memo"),map.get("Flag"));
+		return flag;		
 	}
 }
