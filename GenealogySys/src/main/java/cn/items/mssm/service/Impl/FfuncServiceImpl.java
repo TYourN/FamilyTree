@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cn.items.mssm.mapper.FfuncMapper;
-import cn.items.mssm.mapper.FroleMapper;
 import cn.items.mssm.service.FfuncService;
 
 @Service("FfuncService")

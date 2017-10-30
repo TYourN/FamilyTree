@@ -13,10 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alibaba.fastjson.JSONObject;
-
+import cn.dynamic.mssm.DBContextHolder;
 import cn.items.mssm.entity.CreateDataBase;
-import cn.items.mssm.entity.ResponseUtil;
 import cn.items.mssm.poCustom.FDatabaseCustom;
 import cn.items.mssm.poCustom.FUserCustom;
 import cn.items.mssm.poCustom.FUserinfoCustom;
@@ -67,10 +65,14 @@ public class FdbController {
 		int Id=fdbService.findLatestId();
 		fUserCustom.setDbid(Id);
 	    serverId=Id+"";
-		fdbService.addManaFirst(fUserinfoCustom,serverId);  //在从库中增加用户信息
+	    
+	    DBContextHolder.setDBType(serverId);//在从库中增加用户信息
+		fdbService.addManaFirst(fUserinfoCustom);  
 		
-		int uinfo=fdbService.findLatestUser(serverId);
-		fUserCustom.setUserinfoid(uinfo);	
+		int uinfo=fdbService.findLatestUser();
+		fUserCustom.setUserinfoid(uinfo);
+		
+		DBContextHolder.setDBType("0");
 		fdbService.addUserInfo(fUserCustom);   //在主库中增加用户信息
 	
 		return flag;		

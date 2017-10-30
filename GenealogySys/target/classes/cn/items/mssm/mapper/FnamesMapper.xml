@@ -10,4 +10,46 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="findNameDety" parameterType="String" resultType="FFamnamesCustom">
         select FnameId,Title,Content from f_famnames where Title CONCAT(#{title},'%')
     </select>
+    
+    <!-- 主页插入一条姓氏文化的内容 -->
+    <sql id="Nameskey">
+      <trim suffixOverrides=",">
+        <if test="title!=null">
+            Title,
+        </if>
+        <if test="content!=null">
+            Content,
+        </if>
+        <if test="memo!=null">
+            Memo,
+        </if>
+      </trim>
+    </sql>
+    
+    <sql id="Namesvalue">
+      <trim suffixOverrides=",">
+        <if test="title!=null">
+            #{title},
+        </if>
+        <if test="content!=null">
+            #{content},
+        </if>
+        <if test="memo!=null">
+            #{memo},
+        </if>
+      </trim>
+    </sql>
+    <insert id="addMainNames" parameterType="FFamnamesCustom">
+        insert into f_famnames(<include refid="Nameskey"></include>) values(<include refid="Namesvalue"></include>)
+    </insert>
+    
+    <!-- 删除主页的一条新闻 -->
+    <delete id="deleteMainNames" parameterType="int">
+        delete from f_famnames 
+        <where>
+            <if test="fnameid!=null and fnameid!=''">
+                and FnameId=#{fnameid}
+            </if>           
+        </where>
+    </delete>
 </mapper>

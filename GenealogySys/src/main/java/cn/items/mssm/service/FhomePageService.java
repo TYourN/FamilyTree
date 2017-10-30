@@ -20,5 +20,7 @@ public interface FhomePageService {
 	
 	public List<FFamnewsCustom> findHPNews() throws Exception;
 	
-	public int addFSPics(String title,String url,String memo,String flag) throws Exception;
+	public int addFSPics(String title,String url,String memo,String flag) throws Exception;	
+
+	public int deleteMianPics(int picid)throws Exception;
 }

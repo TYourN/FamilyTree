@@ -8,7 +8,7 @@
 <script type="text/javascript" charset="utf-8" src="${pageContext.request.contextPath}/js/jquery-1.8.3.js"></script>
 </head>
 <body>
-    <form action="${pageContext.request.contextPath}/fhp/addFirstPics.do" method="post" enctype="multipart/form-data">
+    <form action="${pageContext.request.contextPath}/ftest/Upload.do" method="post" enctype="multipart/form-data">
       <input type="file" name="file" id="doc" multiple="multiple" style="width:150px;" onchange="javascript:setImagePreviews();" accept="image/*" />
       <input type="hidden" name="Flag" value="1">
       <input type="submit" name="提交">

@@ -15,9 +15,6 @@ public class FSnameSImpl implements FSnameService{
 	@Autowired
 	private FsnameMapper fSnameMapper;
 
-	/* (non-Javadoc)
-	 * @see cn.items.mssm.service.FSnameService#findAllDataBase()
-	 */
 	@Override
 	public List<FDatabaseCustom> findAllDataBase() throws Exception {
 		// TODO Auto-generated method stub

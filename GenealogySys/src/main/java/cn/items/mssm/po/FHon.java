@@ -11,11 +11,7 @@ public class FHon {
 
     private Integer operid;
 
-    private Integer famid;
-
     private Date opertime;
-
-    private Integer honoper;
 
     public Integer getHonid() {
         return honid;
@@ -49,27 +45,11 @@ public class FHon {
         this.operid = operid;
     }
 
-    public Integer getFamid() {
-        return famid;
-    }
-
-    public void setFamid(Integer famid) {
-        this.famid = famid;
-    }
-
     public Date getOpertime() {
         return opertime;
     }
 
     public void setOpertime(Date opertime) {
         this.opertime = opertime;
-    }
-
-    public Integer getHonoper() {
-        return honoper;
-    }
-
-    public void setHonoper(Integer honoper) {
-        this.honoper = honoper;
     }
 }

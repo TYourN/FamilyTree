@@ -21,5 +21,7 @@ public interface FhomePageMapper {
 	
 	public List<FFamnewsCustom> findHPNews() throws Exception;
 	
-	public int addFSPics(FPicturesCustom fPicturesCustom) throws Exception;
+	public int addFSPics(FPicturesCustom fPicturesCustom) throws Exception;	
+	
+	public int deleteMianPics(int picid)throws Exception;
 }

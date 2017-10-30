@@ -46,14 +46,14 @@ public class CreateDataBase {
         stat = conn.createStatement();
         
         //创建数据表
-        stat.executeUpdate("create table f_cul(CulId int not null primary key,Title varchar(100) not null,Content varchar(8000),FamId int not null,Opertime datetime)");
-        stat.executeUpdate("create table f_generation(GeneId int not null primary key,GeneName varchar(20) not null)");
-        stat.executeUpdate("create table f_hon(HonId int not null primary key,Title varchar(100) not null,Content varchar(8000),OperId int not null,FamId int not null,Opertime datetime,HonOper int not null)");
-        stat.executeUpdate("create table f_news(NewsId int not null primary key,Title varchar(100) not null,Content varchar(8000),OperId int not null,FamId int not null,Opertime datetime,NewsOpen int not null)");
-        stat.executeUpdate("create table f_posts(PostId int not null primary key,Title varchar(200) not null,Content varchar(8000),PosterId int not null,FamId int not null,CreateTime datetime not null,UpdateTime datetime,GoodCount int,BadCount int)");
-        stat.executeUpdate("create table f_replies(ReplyId int not null primary key,ReplierId int not null,PostId int not null,Content varchar(8000),CreateTime datetime not null,GoodCount int,BadCount int)");
+        stat.executeUpdate("create table f_cul(CulId int not null primary key auto_increment,Title varchar(100) not null,Content varchar(8000),FamId int not null,Opertime datetime)");
+        stat.executeUpdate("create table f_generation(GeneId int not null primary key auto_increment,GeneName varchar(20) not null)");
+        stat.executeUpdate("create table f_hon(HonId int not null primary key auto_increment,Title varchar(100) not null,Content varchar(8000),OperId int not null,Opertime datetime,Url varchar(100))");
+        stat.executeUpdate("create table f_news(NewsId int not null primary key auto_increment,Title varchar(100) not null,Content varchar(8000),OperId int not null,Opertime datetime,Url varchar(100),Memo varchar(200))");
+        stat.executeUpdate("create table f_posts(PostId int not null primary key auto_increment,Title varchar(200) not null,Content varchar(8000),PosterId int not null,CreateTime datetime not null,UpdateTime datetime,GoodCount int,BadCount int)");
+        stat.executeUpdate("create table f_replies(ReplyId int not null primary key auto_increment,ReplierId int not null,PostId int not null,Content varchar(8000),CreateTime datetime not null,GoodCount int,BadCount int)");
         stat.executeUpdate("create table f_usergene(UserInfoId int not null,RUserInfoId int not null,GeneId int not null)");
-        stat.executeUpdate("create table f_userinfo(UserInfoId int not null primary key,UserName varchar(50) not null,PassWord varchar(50) not null,Name varchar(50) not null,Pic varchar(500),Address varchar(300),Age int,Sex varchar(30),Marriage varchar(30),Phone varchar(100) not null,Identity varchar(200) not null)");
+        stat.executeUpdate("create table f_userinfo(UserInfoId int not null primary key auto_increment,UserName varchar(50) not null,PassWord varchar(50) not null,Name varchar(50),Pic varchar(500),Address varchar(300),Age int,Sex varchar(30),Marriage varchar(30),Phone varchar(100) not null,Identity varchar(200) not null)");
         
         stat.close();
         conn.close();

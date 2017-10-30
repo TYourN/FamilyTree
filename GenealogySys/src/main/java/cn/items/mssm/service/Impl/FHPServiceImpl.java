@@ -1,6 +1,5 @@
 package cn.items.mssm.service.Impl;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,5 +57,12 @@ public class FHPServiceImpl implements FhomePageService{
 		fPicturesCustom.setOpertime(StringUtil.StringTransfor(StringUtil.getDate()));
 		fPicturesCustom.setFlag(flag);
 		return fHomePageMapper.addFSPics(fPicturesCustom);
-	}	
+	}
+
+	@Override
+	public int deleteMianPics(int picid) throws Exception {
+		// TODO Auto-generated method stub
+		DBContextHolder.setDBType("0");
+		return fHomePageMapper.deleteMianPics(picid);
+	}
 }

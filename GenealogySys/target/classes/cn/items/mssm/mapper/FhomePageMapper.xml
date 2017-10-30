@@ -22,7 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
     <!-- 增加首页第一页、第二页的图片 -->
-    <sql id="key">
+    <sql id="Picskey">
       <trim suffixOverrides=",">
         <if test="title!=null">
             Title,
@@ -42,7 +42,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       </trim>
     </sql>
     
-    <sql id="value">
+    <sql id="Picsvalue">
       <trim suffixOverrides=",">
         <if test="title!=null">
             #{title},
@@ -63,7 +63,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </sql>
     
     <insert id="addFSPics" parameterType="FPicturesCustom">
-        insert into f_pictures(<include refid="key"></include>) values(<include refid="value"></include>)
+        insert into f_pictures(<include refid="Picskey"></include>) values(<include refid="Picsvalue"></include>)
     </insert>
-
+    
+    <!-- 删除第一页、第二页的图片 -->
+    <delete id="deleteMianPics" parameterType="int">
+        delete from f_pictures
+        <where>
+            PicId=#{picid}
+        </where>
+    </delete>
 </mapper>

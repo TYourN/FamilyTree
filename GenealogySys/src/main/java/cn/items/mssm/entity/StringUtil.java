@@ -7,8 +7,10 @@ import java.io.InputStreamReader;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class StringUtil {
@@ -121,5 +123,21 @@ public class StringUtil {
     public static String CutString(String src){
     	String[] sArray1=src.split("/");
 		return "/"+sArray1[sArray1.length-2]+"/"+sArray1[sArray1.length-1];    	
+    }
+    
+    // "/"分隔符截取
+    public static String Cut(String src){
+    	String[] sArray1=src.split("/");
+		return sArray1[sArray1.length-1];    	
+    }
+    
+    // ","分隔符截取
+    public static List<String> CutComma(String url){
+    	String[] sArray=url.split(",");
+    	List<String> list=new ArrayList<>();
+    	for(String i:sArray){
+    		list.add(i);
+    	}
+		return list;  	
     }
 }

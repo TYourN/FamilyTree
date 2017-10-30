@@ -13,4 +13,8 @@ public interface FnamesMapper {
 	 */
 	
 	public FFamnamesCustom findNameDety(String title)throws Exception;
+	
+	public int addMainNames(FFamnamesCustom famnamesCustom)throws Exception;
+	
+	public int deleteMainNames(int fnameid)throws Exception;
 }

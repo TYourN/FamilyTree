@@ -29,4 +29,9 @@
     <bean id="FnewsService" class="cn.items.mssm.service.Impl.FnewsServiceImpl"></bean>
     <!-- 首页新闻的service -->
     <bean id="FnamesService" class="cn.items.mssm.service.Impl.FnamesServiceImpl"></bean>
+    <!-- 对应家族荣誉的service -->
+    <bean id="FhonService" class="cn.items.mssm.service.Impl.FhonServiceImpl"></bean>
+    <!-- 对应家族文化的service -->
+    <bean id="FculService" class="cn.items.mssm.service.Impl.FculServiceImpl"></bean>
+    
 </beans>

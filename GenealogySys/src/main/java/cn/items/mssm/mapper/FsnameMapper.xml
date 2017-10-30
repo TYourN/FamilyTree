@@ -11,7 +11,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
     <select id="findUser" resultType="int">
-        select count(*) as num from student  
+        select count(*) as num from f_userinfo
     </select>
     
     <!-- 搜索出现在数据库中所有的数据库数据 -->

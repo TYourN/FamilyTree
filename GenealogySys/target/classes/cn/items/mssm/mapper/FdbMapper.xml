@@ -11,8 +11,59 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
     <!-- 插入家族的数据库信息 ：主-->
+    <sql id="DBkey">
+      <trim suffixOverrides=",">
+        <if test="famtitle!=null">
+            FamTitle,
+        </if>
+        <if test="famlocal!=null">
+            FamLocal,
+        </if>
+        <if test="databasekey!=null">
+            DatabaseKey,
+        </if>
+        <if test="driverclass!=null">
+            DriverClass,
+        </if>
+        <if test="url!=null">
+            url,
+        </if>
+        <if test="username!=null">
+            UserName,
+        </if>
+        <if test="password!=null">
+            password,
+        </if>       
+      </trim>
+    </sql>
+    
+    <sql id="DBvalue">
+      <trim suffixOverrides=",">
+        <if test="famtitle!=null">
+            #{famtitle},
+        </if>
+        <if test="famlocal!=null">
+            #{famlocal},
+        </if>
+        <if test="databasekey!=null">
+            #{databasekey},
+        </if>
+        <if test="driverclass!=null">
+           #{driverclass},
+        </if>
+        <if test="url!=null">
+            #{url},
+        </if>
+        <if test="username!=null">
+            #{username},
+        </if>
+        <if test="password!=null">
+            #{password},
+        </if>       
+      </trim>
+    </sql>
     <insert id="addDBInfo" parameterType="FDatabaseCustom">
-        insert into f_database(?,?,?,?,?,?,?) values(#{famtitle},#{famlocal},#{databasekey},#{driverclass},#{url},#{username},#{password})
+        insert into f_database(<include refid="DBkey"></include>) values(<include refid="DBvalue"></include>)
     </insert>
     
     <!-- 查找出最新添加的一条数据库信息的Id ：主-->
@@ -21,8 +72,41 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
     <!-- 第一次注册数据库时增加管理员 ：从-->
+    <sql id="FMakey">
+      <trim suffixOverrides=",">
+        <if test="username!=null">
+            UserName,
+        </if>
+        <if test="password!=null">
+            PassWord,
+        </if>
+        <if test="phone!=null">
+            Phone,
+        </if>
+        <if test="identity!=null">
+            Identity,
+        </if>
+      </trim>
+    </sql>
+    
+    <sql id="FMavalue">
+      <trim suffixOverrides=",">
+        <if test="username!=null">
+            #{username},
+        </if>
+        <if test="password!=null">
+            #{password},
+        </if>
+        <if test="phone!=null">
+            #{phone},
+        </if>
+        <if test="identity!=null">
+            #{identity},
+        </if>
+      </trim>
+    </sql>
     <insert id="addManaFirst" parameterType="FUserinfoCustom">
-        insert into f_userinfo(?,?,?,?) values(#{username},#{password},#{phone},#{identity})
+        insert into f_userinfo(<include refid="FMakey"></include>) values(<include refid="FMavalue"></include>)
     </insert>
     
     <!-- 查找出最新添加的一条管理员信息的Id：从 -->
@@ -31,7 +115,40 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
     <!-- 增加人员的登录信息：主 -->
+    <sql id="Userkey">
+      <trim suffixOverrides=",">
+        <if test="username!=null">
+            UserName,
+        </if>
+        <if test="password!=null">
+            PassWord,
+        </if>
+        <if test="dbid!=null">
+            DBId,
+        </if>
+        <if test="userinfoid!=null">
+            UserInfoId,
+        </if>
+      </trim>
+    </sql>
+    
+    <sql id="Uservalue">
+      <trim suffixOverrides=",">
+        <if test="username!=null">
+            #{username},
+        </if>
+        <if test="password!=null">
+            #{password},
+        </if>
+        <if test="dbid!=null">
+            #{dbid},
+        </if>
+        <if test="userinfoid!=null">
+            #{userinfoid},
+        </if>
+      </trim>
+    </sql>
     <insert id="addUserInfo" parameterType="FUserCustom">
-        insert into f_user(?,?,?,?) values(#{username},#{password},#{dbid},#{userinfoid})
+        insert into f_user(<include refid="Userkey"></include>) values(<include refid="Uservalue"></include>)
     </insert>
 </mapper>

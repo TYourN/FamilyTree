@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import cn.dynamic.mssm.DBContextHolder;
 import cn.items.mssm.mapper.FdbMapper;
-import cn.items.mssm.mapper.FsnameMapper;
 import cn.items.mssm.poCustom.FDatabaseCustom;
 import cn.items.mssm.poCustom.FUserCustom;
 import cn.items.mssm.poCustom.FUserinfoCustom;
@@ -34,42 +33,36 @@ public class FdbServiceImpl implements FdbService{
 	@Override
 	public int findDBCount(String famtitle) throws Exception {
 		// TODO Auto-generated method stub
-		DBContextHolder.setDBType("0");
 		return fdbMapper.findDBCount(famtitle);
 	}
 
 	@Override
 	public int addDBInfo(FDatabaseCustom fDatabaseCustom) throws Exception {
 		// TODO Auto-generated method stub
-		DBContextHolder.setDBType("0");
 		return fdbMapper.addDBInfo(fDatabaseCustom);
 	}
 
 	@Override
 	public int findLatestId() throws Exception {
 		// TODO Auto-generated method stub
-		DBContextHolder.setDBType("0");
 		return fdbMapper.findLatestId();
 	}
 
 	@Override
-	public int findLatestUser(String serverId) throws Exception {
+	public int findLatestUser() throws Exception {
 		// TODO Auto-generated method stub
-		DBContextHolder.setDBType(serverId);
 		return fdbMapper.findLatestUser();
 	}
 
 	@Override
 	public int addUserInfo(FUserCustom fUserCustom) throws Exception {
 		// TODO Auto-generated method stub
-		DBContextHolder.setDBType("0");
 		return fdbMapper.addUserInfo(fUserCustom);
 	}
 
 	@Override
-	public int addManaFirst(FUserinfoCustom fUserinfoCustom,String serverId) throws Exception {
+	public int addManaFirst(FUserinfoCustom fUserinfoCustom) throws Exception {
 		// TODO Auto-generated method stub
-		DBContextHolder.setDBType(serverId);
 		return fdbMapper.addManaFirst(fUserinfoCustom);
 	}
 	

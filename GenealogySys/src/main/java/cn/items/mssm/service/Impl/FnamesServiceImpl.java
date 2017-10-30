@@ -26,5 +26,19 @@ public class FnamesServiceImpl implements FnamesService{
 		// TODO Auto-generated method stub
 		DBContextHolder.setDBType("0");
 		return fnamesMapper.findNameDety(title);
+	}
+
+	@Override
+	public int addMainNames(FFamnamesCustom famnamesCustom) throws Exception {
+		// TODO Auto-generated method stub
+		DBContextHolder.setDBType("0");
+		return fnamesMapper.addMainNames(famnamesCustom);
+	}
+
+	@Override
+	public int deleteMainNames(int fnameid) throws Exception {
+		// TODO Auto-generated method stub
+		DBContextHolder.setDBType("0");
+		return fnamesMapper.deleteMainNames(fnameid);
 	}		
 }

@@ -15,4 +15,133 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="findNewDety" parameterType="int" resultType="FFamnewsCustom">
         select Title,Content,Opertime from f_famnews where NewsId=#{newsid}
     </select>
+    
+    <!-- 主页插入一条新闻的内容 -->
+    <sql id="Newskey">
+      <trim suffixOverrides=",">
+        <if test="title!=null">
+            Title,
+        </if>
+        <if test="content!=null">
+            Content,
+        </if>
+        <if test="opertime!=null">
+            Opertime,
+        </if>
+        <if test="memo!=null">
+            Memo,
+        </if>
+        <if test="url!=null">
+            Url,
+        </if>
+      </trim>
+    </sql>
+    
+    <sql id="Newsvalue">
+      <trim suffixOverrides=",">
+        <if test="title!=null">
+            #{title},
+        </if>
+        <if test="content!=null">
+            #{content},
+        </if>
+        <if test="opertime!=null">
+            #{opertime},
+        </if>
+        <if test="memo!=null">
+            #{memo},
+        </if>
+        <if test="url!=null">
+            #{url},
+        </if>
+      </trim>
+    </sql>
+    <insert id="addMainNews" parameterType="FFamnewsCustom">
+        insert into f_famnews(<include refid="Newskey"></include>) values(<include refid="Newsvalue"></include>)
+    </insert>
+    
+    <!-- 删除一条主页新闻信息 -->
+    <delete id="deleteMainNews" parameterType="int">
+        delete from f_famnews 
+        <where>
+            <if test="newsid!=null and newsid!=''">
+                and NewsId=#{newsid}
+            </if>
+        </where>
+    </delete>
+    
+    <!-- 查询出所有的家族新闻 -->
+    <select id="findFamNews" resultType="FNewsCustom">
+        select * from f_news
+    </select>
+    
+    <!-- 根据Id查找出家族新闻的具体信息 -->
+    <select id="findFamNewsDety" parameterType="int" resultType="FNewsCustom">
+        select Title,Content,Opertime from f_news 
+        <where>
+            <if test="newsid!=null and newsid!=''">
+                and NewsId=#{newsid}
+            </if>
+        </where>
+    </select>
+    
+    <!-- 增加一条对应家族的新闻信息 -->
+    <sql id="FNewskey">
+      <trim suffixOverrides=",">
+        <if test="title!=null">
+            Title,
+        </if>
+        <if test="content!=null">
+            Content,
+        </if>
+        <if test="operid!=null">
+            OperId,
+        </if>
+        <if test="opertime!=null">
+            Opertime,
+        </if>
+        <if test="url!=null">
+            Url,
+        </if>
+        <if test="memo!=null">
+            Memo,
+        </if>
+      </trim>
+    </sql>
+    
+    <sql id="FNewsvalue">
+      <trim suffixOverrides=",">
+        <if test="title!=null">
+            #{title},
+        </if>
+        <if test="content!=null">
+            #{content},
+        </if>
+        <if test="operid!=null">
+            #{operid},
+        </if>
+        <if test="opertime!=null">
+            #{opertime},
+        </if>
+        <if test="url!=null">
+            #{url},
+        </if>
+        <if test="memo!=null">
+            #{memo},
+        </if>
+      </trim>
+    </sql>
+    <insert id="addFamNews" parameterType="FNewsCustom">
+        insert into f_news(<include refid="FNewskey"></include>) values(<include refid="FNewsvalue"></include>)
+    </insert>
+    
+    <!-- 删除一条对应家族的新闻信息 -->
+    <delete id="deleteFamNews" parameterType="int">
+        delete from f_news
+        <where>
+            <if test="newsid!=null and newsid!=''">
+                and NewsId=#{newsid}
+            </if>
+        </where>
+    </delete>
 </mapper>

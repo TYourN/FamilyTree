@@ -26,9 +26,9 @@ public interface FdbService {
 	
 	public int findLatestId()throws Exception;
 	
-	public int addManaFirst(FUserinfoCustom fUserinfoCustom,String serverId)throws Exception;
+	public int addManaFirst(FUserinfoCustom fUserinfoCustom)throws Exception;
 	
-	public int findLatestUser(String serverId)throws Exception;
+	public int findLatestUser()throws Exception;
 	
 	public int addUserInfo(FUserCustom fUserCustom)throws Exception;
 }

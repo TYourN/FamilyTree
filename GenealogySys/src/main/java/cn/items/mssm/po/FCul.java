@@ -9,8 +9,6 @@ public class FCul {
 
     private String content;
 
-    private Integer famid;
-
     private Date opertime;
 
     public Integer getCulid() {
@@ -35,14 +33,6 @@ public class FCul {
 
     public void setContent(String content) {
         this.content = content == null ? null : content.trim();
-    }
-
-    public Integer getFamid() {
-        return famid;
-    }
-
-    public void setFamid(Integer famid) {
-        this.famid = famid;
     }
 
     public Date getOpertime() {

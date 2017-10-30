@@ -2,7 +2,6 @@ package cn.items.mssm.po;
 
 import java.util.Date;
 
-import org.springframework.format.annotation.DateTimeFormat;
 
 public class FNews {
     private Integer newsid;
@@ -12,12 +11,8 @@ public class FNews {
     private String content;
 
     private Integer operid;
-
-    private Integer famid;
      
     private Date opertime;
-
-    private Integer newsopen;
 
     public Integer getNewsid() {
         return newsid;
@@ -50,14 +45,6 @@ public class FNews {
     public void setOperid(Integer operid) {
         this.operid = operid;
     }
-
-    public Integer getFamid() {
-        return famid;
-    }
-
-    public void setFamid(Integer famid) {
-        this.famid = famid;
-    }
    
     public Date getOpertime() {
         return opertime;
@@ -65,13 +52,5 @@ public class FNews {
 
     public void setOpertime(Date opertime) {
         this.opertime = opertime;
-    }
-
-    public Integer getNewsopen() {
-        return newsopen;
-    }
-
-    public void setNewsopen(Integer newsopen) {
-        this.newsopen = newsopen;
     }
 }
