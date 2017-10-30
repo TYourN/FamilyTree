@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace:命名空间，用于隔离sql语句 ,namespace等于Mapper接口地址-->
+<!-- #{}表示一个占位符 -->
+<mapper namespace="cn.items.mssm.mapper.FhonMapper">
+    
+    <!-- 读取对应家族的荣誉 -->
+    <select id="findFamHon" resultType="FHonCustom">
+        select HonId,Url from f_hon
+    </select>
+    
+    <!-- 根据Id读取对应家族的荣誉文字信息 -->
+    <select id="findHonDety" parameterType="int" resultType="FHonCustom">
+        select Title,Content from f_hon 
+        <where>
+            <if test="honid!=null and honid!=''">
+                and HonId=#{honid}
+            </if>
+        </where>
+    </select>
+    
+    <!-- 增加对应家族荣誉 -->
+    <sql id="Honkey">
+      <trim suffixOverrides=",">
+        <if test="title!=null">
+            Title,
+        </if>
+        <if test="content!=null">
+            Content,
+        </if>
+        <if test="operid!=null">
+            OperId,
+        </if>
+        <if test="opertime!=null">
+            Opertime,
+        </if>
+        <if test="url!=null">
+            Url,
+        </if>
+      </trim>
+    </sql>
+    
+    <sql id="Honvalue">
+      <trim suffixOverrides=",">
+        <if test="title!=null">
+            #{title},
+        </if>
+        <if test="content!=null">
+            #{content},
+        </if>
+        <if test="operid!=null">
+            #{operid},
+        </if>
+        <if test="opertime!=null">
+            #{opertime},
+        </if>
+        <if test="url!=null">
+            #{url},
+        </if>
+      </trim>
+    </sql>
+    
+    <insert id="addFamHon" parameterType="FHonCustom">
+        insert into f_hon(<include refid="Honkey"></include>) values(<include refid="Honvalue"></include>)
+    </insert>
+    
+    <!-- 删除对应Id的对应家族的荣誉 -->
+    <delete id="deleteFamHon" parameterType="int">
+        delete from f_hon
+        <where>
+            <if test="honid!=null and honid!=''">
+                and HonId=#{honid}
+            </if>
+        </where>
+    </delete>
+</mapper>

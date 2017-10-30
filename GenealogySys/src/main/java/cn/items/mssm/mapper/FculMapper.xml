@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace:命名空间，用于隔离sql语句 ,namespace等于Mapper接口地址-->
+<!-- #{}表示一个占位符 -->
+<mapper namespace="cn.items.mssm.mapper.FculMapper">
+    
+    <!-- 查找出所有的文化 -->
+    <select id="findFamCul" resultType="FCulCustom">
+        select * from f_cul
+    </select>
+    
+    <!-- 上传家族文化 -->
+    <sql id="Culkey">
+      <trim suffixOverrides=",">
+        <if test="title!=null">
+            Title,
+        </if>
+        <if test="content!=null">
+            Content,
+        </if>
+        <if test="opertime!=null">
+            Opertime,
+        </if>
+      </trim>
+    </sql>
+    
+    <sql id="Culvalue">
+      <trim suffixOverrides=",">
+        <if test="title!=null">
+            #{title},
+        </if>
+        <if test="content!=null">
+            #{content},
+        </if>
+        <if test="opertime!=null">
+            #{opertime},
+        </if>
+      </trim>
+    </sql>
+    <insert id="addFamCul" parameterType="FCulCustom">
+        insert into f_cul(<include refid="Culkey"></include>) values(<include refid="Culvalue"></include>)
+    </insert>
+    
+    <!-- 更新家族文化 -->
+    <update id="updateFamCul" parameterType="FCulCustom">
+        update f_cul
+        <trim prefix="set" suffixOverrides=",">
+            <if test="title!=null and title!=''">Title=#{title},</if>
+            <if test="content!=null and title!=''">Content=#{content},</if>
+            <if test="opertime!=null">Opertime=#{opertime},</if>
+        </trim>
+        <where>
+            <if test="culid!=null and culid!=''">
+                and CulId=#{culid}
+            </if>
+        </where>
+    </update>
+    
+</mapper>
