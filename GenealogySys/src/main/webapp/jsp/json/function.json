@@ -1,0 +1,55 @@
+[{
+   "id":1,
+   "text":"家族族谱管理",
+   "memo":"lnr lnr-map-marker",
+   "attr":"faTree.jsp",
+   "children":[]
+ },
+ {
+   "id":2,
+   "text":"家族论坛管理",
+   "memo":"lnr lnr-volume-medium",
+   "attr":"bbs.jsp",
+   "children":[]
+ },
+ {
+   "id":3,
+   "text":"家族信息管理",
+   "memo":"lnr lnr-book",
+   "attr":"",  
+   "children":[
+       {
+         "id":8,
+         "text":"家族荣誉管理",
+         "memo":"",
+         "attr":"kudos.jsp"       
+       },
+       {
+         "id":9,
+         "text":"家族资讯管理",
+         "memo":"",
+         "attr":"news.jsp"       
+       },
+       {
+         "id":10,
+         "text":"家族文化管理",
+         "memo":"",
+         "attr":"culture.jsp"        
+       }
+   ] 
+ },
+ {
+   "id":4,
+   "text":"家族备份恢复",
+   "memo":"lnr lnr-store",
+   "attr":"backup.jsp",
+   "children":[]
+ },
+ {
+   "id":5,
+   "text":"家族人员管理",
+   "memo":"lnr lnr-user",
+   "attr":"users.jsp",
+   "children":[]
+ }
+] 

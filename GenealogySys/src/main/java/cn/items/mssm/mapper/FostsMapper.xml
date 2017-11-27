@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace:命名空间，用于隔离sql语句 ,namespace等于Mapper接口地址-->
+<!-- #{}表示一个占位符 -->
+<mapper namespace="cn.items.mssm.mapper.FostsMapper">
+    
+    <!-- 查找出最新更新的几条家族公告信息 -->
+    <select id="findReportsTop" resultType="FPostsCustom">
+        SELECT TItle,CreateTime from f_posts where Type='公告' order by CreateTime desc LIMIT 0,6 
+    </select>
+    
+    <!-- 查询出今天的所有帖子数目 -->
+    <select id="findTotie" resultType="int">
+        select count(*) from f_posts where TO_DAYS(CreateTime)=TO_DAYS(NOW()) 
+    </select>
+    
+    <!-- 查询出昨天的所有帖子数目 -->
+    <select id="findYestie" resultType="int">
+        select count(*) from f_posts where TO_DAYS(NOW())-TO_DAYS(CreateTime)=1
+    </select>
+    
+    <!-- 查询出所有的水贴数目 -->
+    <select id="findAlltie" resultType="int">
+        select count(*) from f_posts where Type='水贴'
+    </select>
+    
+    <!-- 查询出所有的公告数目 -->
+    <select id="findAllreports" resultType="int">
+        select count(*) from f_posts where Type='公告'
+    </select> 
+    
+    <!-- 查找出水贴中最晚发帖的时间 -->
+    <select id="findLatesttie" resultType="Date">
+        select CreateTime from f_posts where Type='水贴' ORDER BY CreateTime DESC LIMIT 0,1
+    </select>
+    
+    <!-- 查找出公告中最晚发帖的时间 -->
+    <select id="findLatestReport" resultType="Date">
+        select CreateTime from f_posts where Type='公告' ORDER BY CreateTime DESC LIMIT 0,1
+    </select>
+    
+    <!-- 查找出所有的水贴相关信息 -->
+    <select id="findAlltieInfo" resultType="FPostsCustom">
+        select PostId,Title,Type,CreateTime from f_posts WHERE Type='水贴' ORDER BY CreateTime DESC
+    </select>
+    
+    <!-- 查找出所有的水贴相关信息 -->
+    <select id="findAllReportsInfo" resultType="FPostsCustom">
+        select PostId,Title,Type,CreateTime from f_posts WHERE Type='公告' ORDER BY CreateTime DESC
+    </select>
+    
+    <!-- 查找出对应id的公告或水贴的信息 -->
+    <select id="findDetialById" parameterType="int" resultType="FPostsCustom">
+        select Title,Content,`Name`,Type,CreateTime,GoodCount,BadCount from f_userinfo,f_posts where f_userinfo.UserInfoId=f_posts.PosterId and PostId=#{postid}
+    </select>
+    
+    <!-- 删除一条对应的水贴或者公告 -->
+    <delete id="deleteDetialById" parameterType="int">
+        delete from f_posts where PostId=#{postid}
+    </delete>
+    
+    <!-- 更新对应id的公告内容 -->
+    <update id="updateRepById" parameterType="FPostsCustom">
+        update f_posts
+    	<set>
+      		<if test="title != null" >
+        		Title = #{title,jdbcType=VARCHAR},
+      		</if>
+      		<if test="content != null" >
+        		Content = #{content,jdbcType=VARCHAR},
+      		</if>
+      		<if test="posterid != null" >
+        		PosterId = #{posterid,jdbcType=INTEGER},
+      		</if>
+      		<if test="createtime != null" >
+        		CreateTime = #{createtime,jdbcType=TIMESTAMP},
+      		</if>
+      		<if test="updatetime != null" >
+        		UpdateTime = #{updatetime,jdbcType=TIMESTAMP},
+      		</if>
+      		<if test="goodcount != null" >
+        		GoodCount = #{goodcount,jdbcType=INTEGER},
+      		</if>
+      		<if test="badcount != null" >
+        		BadCount = #{badcount,jdbcType=INTEGER},
+      		</if>
+      		<if test="type != null" >
+        		Type = #{type,jdbcType=VARCHAR},
+      		</if>
+    	</set>
+    	where PostId = #{postid,jdbcType=INTEGER}
+    </update>
+    
+    <!-- 发布公告 -->
+    <sql id="Postkey">
+      <trim suffixOverrides=",">
+        <if test="title!=null">
+            Title,
+        </if>
+        <if test="content!=null">
+            Content,
+        </if>
+        <if test="posterid!=null">
+            PosterId,
+        </if>
+        <if test="createtime!=null">
+            CreateTime,
+        </if>
+        <if test="type!=null">
+            Type,
+        </if>
+      </trim>
+    </sql>
+    
+    <sql id="Postvalue">
+      <trim suffixOverrides=",">
+        <if test="title!=null">
+            #{title},
+        </if>
+        <if test="content!=null">
+            #{content},
+        </if>
+        <if test="posterid!=null">
+            #{posterid},
+        </if>
+        <if test="createtime!=null">
+            #{createtime},
+        </if>
+        <if test="type!=null">
+            #{type},
+        </if>
+      </trim>
+    </sql>
+    <insert id="addPosts" parameterType="FPostsCustom">
+    	insert into f_posts(<include refid="Postkey"></include>) values(<include refid="Postvalue"></include>)
+    </insert>
+    
+</mapper>

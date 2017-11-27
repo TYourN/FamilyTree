@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace:命名空间，用于隔离sql语句 ,namespace等于Mapper接口地址-->
+<!-- #{}表示一个占位符 -->
+<mapper namespace="cn.items.mssm.mapper.FproMapper">
+     
+    <!-- 注册家族时插入一条对应的家族数据 -->
+    <sql id="Prokey">
+      <trim suffixOverrides=",">
+        <if test="dbid!=null">
+            Dbid,
+        </if>
+        <if test="fulname!=null">
+            FulName,
+        </if>
+        <if test="famlocal!=null">
+            FamLocal,
+        </if>
+        <if test="createage!=null">
+            CreateAge,
+        </if>
+        <if test="introduce!=null">
+            Introduce,
+        </if>
+        <if test="url!=null">
+            Url,
+        </if>
+      </trim>
+    </sql>
+    
+    <sql id="Provalue">
+      <trim suffixOverrides=",">
+        <if test="dbid!=null">
+            #{dbid},
+        </if>
+        <if test="fulname!=null">
+            #{fulname},
+        </if>
+        <if test="famlocal!=null">
+            #{famlocal},
+        </if>
+        <if test="createage!=null">
+            #{createage},
+        </if>
+        <if test="introduce!=null">
+            #{introduce},
+        </if>
+        <if test="url!=null">
+            #{url},
+        </if>
+      </trim>
+    </sql>
+    <insert id="addFamPro" parameterType="FProfileCustom">
+        insert into f_profile(<include refid="Prokey"></include>) values(<include refid="Provalue"></include>)
+    </insert>
+    
+    <!-- 对家族简介信息进行修改 -->
+    <update id="updateFamPro" parameterType="FProfileCustom">
+    	update f_profile
+    	<set>
+      	<if test="fulname != null" >
+        	FulName = #{fulname,jdbcType=VARCHAR},
+      	</if>
+      	<if test="famlocal != null" >
+        	FamLocal = #{famlocal,jdbcType=VARCHAR},
+      	</if>
+      	<if test="createage != null" >
+        	CreateAge = #{createage,jdbcType=VARCHAR},
+      	</if>
+      	<if test="introduce != null" >
+        	Introduce = #{introduce,jdbcType=VARCHAR},
+      	</if>
+        	Url = #{url,jdbcType=VARCHAR},
+    	</set>
+    		where Dbid = #{dbid,jdbcType=INTEGER}
+  	</update>
+  	
+    <!-- 查找对应家族的家族简介信息 -->
+    <select id="findFamPro" parameterType="int" resultType="FProfileCustom">
+        select f_profile.* from f_profile,f_user where f_profile.Dbid=f_user.DBId and f_user.UserId=#{userid}
+    </select>
+</mapper>
