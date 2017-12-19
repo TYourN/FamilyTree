@@ -8,7 +8,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         
     <!-- 获取首页第一页的图片 -->
     <select id="findFirstPics" resultType="String">
-        select Url from f_pictures where Flag='第一页' LIMIT 0,3 
+        select Url from f_pictures where Flag='第一页' ORDER BY Opertime DESC LIMIT 0,3 
+    </select>
+    
+    <!-- 读取所有对应条件的公共图片资源 -->
+    <select id="findPicsByAu" parameterType="Map" resultType="String">
+        select Url from f_pictures 
+        <where>
+            <if test="flag!=null and flag!=''">
+                and Flag=#{flag}
+            </if>
+        </where>
     </select>
     
     <!-- 根据条件获取首页第二页的的图片 -->
@@ -68,9 +78,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <!-- 删除第一页、第二页的图片 -->
     <delete id="deleteMianPics" parameterType="int">
-        delete from f_pictures
-        <where>
-            PicId=#{picid}
-        </where>
+        delete from f_pictures where PicId=#{picid}
+    </delete>
+    
+    <!-- 删除对应Flag的图片 -->
+    <delete id="deletePicsByFLag" parameterType="String">
+        delete from f_pictures where Flag=#{flag}
     </delete>
 </mapper>

@@ -13,6 +13,16 @@ public class FFamnewsCustom extends FFamnews{
 	
 	private Integer pagenum;//每页多少条
 	
+	private String createtime;
+	
+	public String getCreatetime() {
+		return createtime;
+	}
+
+	public void setCreatetime(String createtime) {
+		this.createtime = createtime;
+	}
+
 	private JSONArray locate;//页脚存储
 
 	public String getMemo() {

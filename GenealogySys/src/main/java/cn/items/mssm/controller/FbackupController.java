@@ -31,11 +31,15 @@ public class FbackupController {
 	@Resource
 	private FuserService fuserService;
 	
+	/*public static Map<String,Object> usermap=new HashMap<>();*/
+	
 	//获取家族人员外迁情况
+	@SuppressWarnings("unchecked")
 	@ResponseBody
 	@RequestMapping("/findFamExo")
 	public Map<String, Object> findFamExo(HttpSession session,HttpServletResponse res)throws Exception{
-		DBContextHolder.setDBType("1");
+		Map<String,Object> usermap=(Map<String, Object>) session.getAttribute("userinfo");
+		DBContextHolder.setDBType(usermap.get("dbid").toString());
 		Map<String, Object> map=new HashMap<>();
 		int allCount=fuserService.findFamCount();	
 		int inCount=fuserService.findExCount(StringUtil.checkMap("in","在家族所在地中"));  //统计在家族所在地的人数
@@ -126,7 +130,9 @@ public class FbackupController {
 	@ResponseBody
 	@RequestMapping("/findFamSex")
 	public Map<String, Object> findFamSex(HttpSession session,HttpServletResponse res)throws Exception{
-		DBContextHolder.setDBType("1");
+		@SuppressWarnings("unchecked")
+		Map<String,Object> usermap=(Map<String, Object>) session.getAttribute("userinfo");
+		DBContextHolder.setDBType(usermap.get("dbid").toString());
 		Map<String, Object> map=new HashMap<>();
 		Map<String, String> m=new HashMap<>();
 		m.put("sex", "男");
@@ -146,10 +152,12 @@ public class FbackupController {
 	}
 	
 	//查找家族中不同年龄段的人的数量
+	@SuppressWarnings("unchecked")
 	@ResponseBody
 	@RequestMapping("/findFamAge")
 	public Map<String, Object> findFamAge(HttpSession session,HttpServletResponse res)throws Exception{
-		DBContextHolder.setDBType("1");
+		Map<String,Object> usermap=(Map<String, Object>) session.getAttribute("userinfo");
+		DBContextHolder.setDBType(usermap.get("dbid").toString());
 		Map<String, Object> map=new HashMap<>();
 		int allCount=fuserService.findFamCount();
 		

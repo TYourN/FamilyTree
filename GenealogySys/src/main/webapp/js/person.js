@@ -3,6 +3,28 @@ $(document).ready(function(){
 	getRFInfo("#roles_server","../../frole/findRoleInfo.do");
 	getRFInfo("#funcs_server","../../ffunc/findAllfunc.do");
 	getParent();
+	
+	$("#excelfile").change(function(){
+		var reader = new FileReader();
+		var f=$("#excelfile").get(0).files[0];
+		reader.readAsDataURL(f);
+		reader.onload = function(e) {
+			var formData = new FormData();
+			formData.append("eFile",f);
+			$.ajax({
+				type:"post",
+				url:"../../fuser/insertUserByExcel.do",
+				async:true,
+				data:formData,
+		        contentType: false,  
+		        processData: false,
+		        dataType:"json",
+				success:function(data){
+					
+				}
+			})
+		}
+	})
 })
 
 function getUserInfo(){
@@ -572,7 +594,7 @@ function delUser(idlist){
 		data:JSON.stringify(idlist),
 		dataType:"json",
 		success:function(result){
-			if(result==1){
+			if(result!=0){
 				alert("删除成功！！！");
 				window.location.reload();
 			}else{
@@ -960,4 +982,8 @@ function clearFuncC(){
 			$(this).css("background-color","#ffffff");
 		} 
 	})
+}
+
+function upExcel(){
+	$("#excelfile").trigger("click");
 }

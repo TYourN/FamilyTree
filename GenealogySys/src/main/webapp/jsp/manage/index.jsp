@@ -34,33 +34,24 @@
 		<nav class="navbar navbar-default navbar-fixed-top" style="z-index:800">
 			<div class="brand">
 				<a href="index.html" style="float: left;"><img src="${pageContext.request.contextPath}/img/favicon.png" alt="Klorofil Logo" class="img-responsive logo" style="max-width: 48%;"></a>
-			    <span style="font-size: 28px;">宁波陆家</span>
+			    <span id="FName" style="font-size: 28px;"></span>			    
 			</div>
 			<div class="container-fluid">
 				<div class="navbar-btn">
 					<button type="button" class="btn-toggle-fullwidth"><i class="lnr lnr-arrow-left-circle"></i></button>
 				</div>
-				<form class="navbar-form navbar-left">
-					<div class="input-group">
-						<input type="text" value="" class="form-control" placeholder="搜索对应的功能...">
-						<span class="input-group-btn"><button type="button" class="btn btn-primary">Go</button></span>
-					</div>
-				</form>
 				<div class="navbar-btn navbar-btn-right">
-					<a class="btn btn-success update-pro"  title="Upgrade to Pro" target="_blank"><i class="fa fa-rocket"></i> <span>退出登录</span></a>
+					<a onclick="logout()" class="btn btn-success update-pro"  title="Upgrade to Pro" target="_blank"><i class="fa fa-rocket"></i> <span>退出登录</span></a>
 				</div>
 				<div id="navbar-menu">
-					<ul class="nav navbar-nav navbar-right">
-						
+					<ul class="nav navbar-nav navbar-right">					
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="${pageContext.request.contextPath}/img/user.png" class="img-circle" alt="Avatar"> <span style="font-size:large;">陆正贤</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+							<a id="userDetail" href="#" class="dropdown-toggle" data-toggle="dropdown"></a>
 							<ul class="dropdown-menu">
 								<li><a href="#"><i class="lnr lnr-user"></i> <span>个人中心</span></a></li>
-								<li><a href="#"><i class="lnr lnr-envelope"></i> <span>消息中心</span></a></li>
 								<li><a href="#"><i class="lnr lnr-cog"></i> <span>设置</span></a></li>
 							</ul>
-						</li>
-						
+						</li>						
 					</ul>
 				</div>
 			</div>
@@ -88,7 +79,7 @@
 									<div id="HeadInfo" class="profile-header">
 										<div class="overlay"></div>
 										<div class="profile-main">
-											<img src="" class="img-circle" />
+											<img style="width:14%" src="" class="img-circle" />
 											<h3></h3>
 											<span class="online-status status-available">
 												已入住
@@ -131,7 +122,7 @@
 											<h4 class="heading">家族简介</h4>
 											<p id="content"></p>
 										</div>
-										<div class="text-center">
+										<div id="upFam" class="text-center">
 											<a href="#" class="btn btn-primary" data-am-modal="{target: '#doc-modal-1', closeViaDimmer: 0, width: 800}">
 												修改信息
 											</a>
@@ -150,7 +141,7 @@
 										<div class="tab-pane fade in active" id="tab-bottom-left1">
 											<ul class="list-unstyled activity-timeline">
 											</ul>	
-											<div class="text-center" style="margin-top: 88px;"><a onclick="pathload()" class="btn btn-default">查看更多</a></div>
+											<div id="morepost" class="text-center" style="margin-top: 88px;"><a onclick="pathload()" class="btn btn-default">查看更多</a></div>
 										</div>
 										<div class="tab-pane fade" id="tab-bottom-left2">
 											<div class="table-responsive">
@@ -158,7 +149,7 @@
 													
 												</table>
 											</div>
-											<div class="text-center" style="margin-top: 88px;"><a href="#" class="btn btn-default">查看所有</a></div>
+											<div id="moreuser" class="text-center" style="margin-top: 88px;"><a href="#" class="btn btn-default">查看所有</a></div>
 										</div>
 									</div>
 								</div>

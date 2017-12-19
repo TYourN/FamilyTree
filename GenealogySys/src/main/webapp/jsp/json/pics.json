@@ -1,0 +1,28 @@
+[
+	{
+		"id": "homebg",
+		"item": [
+			"assets/img/11.jpg",
+			"assets/img/10.jpg",
+			"assets/img/4.jpg",
+			"assets/img/10.jpg",
+			"assets/img/4.jpg",
+			"assets/img/10.jpg"
+		]
+	}, 
+	{
+		"id": "personbg",
+		"item":["assets/img/11.jpg"]	
+	},
+	{
+		"id": "phonebg",
+		"item": [
+			"assets/img/11.jpg",
+			"assets/img/10.jpg",
+			"assets/img/4.jpg",
+			"assets/img/10.jpg",
+			"assets/img/4.jpg",
+			"assets/img/10.jpg"
+		]	
+	}
+]

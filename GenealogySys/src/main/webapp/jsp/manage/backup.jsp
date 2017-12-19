@@ -26,10 +26,10 @@
 				<h3 class="panel-title">家族信息备份和恢复</h3>
 			</div>
 			<div class="panel-body">
-				<button type="button" class="btn btn-default"
-					style="padding: 4px 20px; margin-right: 10px">数据备份</button>
-				<button type="button" class="btn btn-default"
-					style="padding: 4px 20px; margin-right: 10px">数据恢复</button>
+				<button id="bbutton" type="button" class="btn btn-default"
+					style="padding: 4px 20px; margin-right: 10px" onclick="backupDB()">数据备份</button>
+<!-- 				<button type="button" class="btn btn-default"
+					style="padding: 4px 20px; margin-right: 10px" onclick="importDB()">数据恢复</button> -->
 			</div>
 		</div>
 		<div class="panel panel-headline">

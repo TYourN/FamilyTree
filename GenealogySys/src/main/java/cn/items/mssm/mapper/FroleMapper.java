@@ -3,6 +3,7 @@ package cn.items.mssm.mapper;
 import java.util.List;
 
 import cn.items.mssm.poCustom.FRoleCustom;
+import cn.items.mssm.poCustom.FRolefuncCustom;
 
 public interface FroleMapper {
 
@@ -21,4 +22,16 @@ public interface FroleMapper {
 	public int deleteRoleInfo(int roleid) throws Exception;
 	
 	public List<FRoleCustom> findRoleInfo() throws Exception;
+	
+	public FRoleCustom findRInfoById(int roleid)throws Exception;
+	
+	public List<FRolefuncCustom> findRFunc(int roleid)throws Exception;
+	
+	public int delRFunc(int roleid)throws Exception;
+	
+	public int addRFunc(FRolefuncCustom fRolefuncCustom)throws Exception;
+	
+	public int findRIdByName(String title)throws Exception;
+	
+	public List<FRoleCustom> findUserRoleTitle(int userid)throws Exception;
 }

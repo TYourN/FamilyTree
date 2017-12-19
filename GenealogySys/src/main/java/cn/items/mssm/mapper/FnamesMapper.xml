@@ -6,9 +6,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- #{}表示一个占位符 -->
 <mapper namespace="cn.items.mssm.mapper.FnamesMapper">
     
+    <!-- 获取所有的姓氏文化 -->
+    <select id="findAllName" resultType="FFamnamesCustom">
+        select * from f_famnames
+    </select>
+    
     <!-- 查找出对应Title的姓氏文化 -->
     <select id="findNameDety" parameterType="String" resultType="FFamnamesCustom">
-        select FnameId,Title,Content from f_famnames where Title CONCAT(#{title},'%')
+        select * from f_famnames where Title LIKE concat(concat('%',#{title}),'%')
+    </select>
+    
+    <!-- 查找出对应Id的姓氏文化 -->
+    <select id="findNameById" parameterType="int" resultType="FFamnamesCustom">
+        select * from f_famnames where FnameId=#{fnameid}
     </select>
     
     <!-- 主页插入一条姓氏文化的内容 -->
@@ -43,13 +53,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         insert into f_famnames(<include refid="Nameskey"></include>) values(<include refid="Namesvalue"></include>)
     </insert>
     
-    <!-- 删除主页的一条新闻 -->
+    <!-- 删除主页的一条姓氏文化 -->
     <delete id="deleteMainNames" parameterType="int">
-        delete from f_famnames 
+        delete from f_famnames where FnameId=#{fnameid}               
+    </delete>
+    
+    <!-- 修改一条姓氏文化 -->
+    <update id="updateMainNames" parameterType="FFamnamesCustom">
+        update f_famnames
+        <trim prefix="set" suffixOverrides=",">
+            <if test="title!=null and title!=''">Title=#{title},</if>
+            <if test="content!=null and title!=''">Content=#{content},</if>
+            <if test="memo!=null and memo!=''">Memo=#{memo},</if>
+        </trim>
         <where>
             <if test="fnameid!=null and fnameid!=''">
                 and FnameId=#{fnameid}
-            </if>           
+            </if>
         </where>
-    </delete>
+    </update>
 </mapper>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace:命名空间，用于隔离sql语句 ,namespace等于Mapper接口地址-->
+<!-- #{}表示一个占位符 -->
+<mapper namespace="cn.items.mssm.mapper.FnodeMapper">
+    
+    <!-- 按对应条件获取到家谱信息 -->
+    <sql id="Base_Column_List" >
+    	NodeId, Id, Name, ParentId, Sex, Consort, Count
+    </sql>
+    <select id="findNodeByCount" resultType="FNodeCustom" parameterType="int">
+    	select * from f_node where Count=#{count}
+    </select> 
+    
+    <!-- 获取到最大的count -->
+    <select id="findNodeCount" resultType="Object">
+        select MAX(Count) as n from f_node
+    </select>
+    
+    <!-- 增加一段家谱树 -->
+    <sql id="Nodekey">
+      <trim suffixOverrides=",">
+        <if test="id!=null">
+            Id,
+        </if>
+        <if test="name!=null">
+            Name,
+        </if>
+        <if test="parentid!=null">
+            ParentId,
+        </if>
+        <if test="sex!=null">
+            Sex,
+        </if>
+        <if test="count!=null">
+            Count,
+        </if>
+        <if test="consort!=null">
+            Consort,
+        </if>
+      </trim>
+    </sql>
+    
+    <sql id="Nodevalue">
+      <trim suffixOverrides=",">
+        <if test="id!=null">
+            #{id},
+        </if>
+        <if test="name!=null">
+            #{name},
+        </if>
+        <if test="parentid!=null">
+            #{parentid},
+        </if>
+        <if test="sex!=null">
+            #{sex},
+        </if>
+        <if test="count!=null">
+            #{count},
+        </if>
+        <if test="consort!=null">
+            #{consort},
+        </if>
+      </trim>
+    </sql>
+    <insert id="addNodeFrag" parameterType="FNodeCustom">
+        insert into f_node(<include refid="Nodekey"></include>) values(<include refid="Nodevalue"></include>)
+    </insert>
+    
+    <!-- 找到家谱树中最大的count -->
+    <select id="findMaxCount" resultType="Object">
+        select MAX(Count) from f_node
+    </select>
+    
+    <!-- 删除对应的族谱节点 -->
+    <delete id="deleteNode" parameterType="int">
+        delete from f_node where Count=#{count}
+    </delete>
+</mapper>

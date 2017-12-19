@@ -37,7 +37,8 @@
 				<button type="button" class="btn btn-default"
 					style="margin-right: 3px; padding: 5px 13px" onclick="userDel()">删除</button>
 				<button type="button" class="btn btn-default"
-					style="margin-right: 3px; padding: 5px 13px; float: right;">批量导入</button>
+					style="margin-right: 3px; padding: 5px 13px; float: right;" onclick="upExcel()">批量导入</button>
+				<input type="file" id="excelfile" style="display:none"/>
 				<div style="margin-top: 15px;">
 					<table id="users_server" class="table table-hover table-striped"
 						style="vertical-align: middle !important; text-align: center;">
@@ -180,7 +181,7 @@
 						<div id="UPic" class="form-group">
 							<label for="firstname" class="col-sm-2 control-label" style="float:left;">照片:</label>
 							<input type="file" name="file" id="doc" multiple="multiple" style="width:37%;padding-left: 2.5%;padding-top: 1%l;float:left" onchange="setImagePreviews()"/>
-							<div id="pics" style="height:70px;width:98%;padding-left: 18%"></div>
+							<div id="pics" style="width:98%;padding-left: 18%"></div>
 						</div>
 						<div style="position: relative; bottom: 7%; padding-left: 29%">
 							<button id="updateDe" class="btn btn-default"

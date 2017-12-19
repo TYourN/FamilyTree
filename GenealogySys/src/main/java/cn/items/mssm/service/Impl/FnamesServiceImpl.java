@@ -1,5 +1,7 @@
 package cn.items.mssm.service.Impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,5 +42,23 @@ public class FnamesServiceImpl implements FnamesService{
 		// TODO Auto-generated method stub
 		DBContextHolder.setDBType("0");
 		return fnamesMapper.deleteMainNames(fnameid);
+	}
+
+	@Override
+	public List<FFamnamesCustom> findAllName() throws Exception {
+		// TODO Auto-generated method stub
+		return fnamesMapper.findAllName();
+	}
+
+	@Override
+	public FFamnamesCustom findNameById(int fnameid) throws Exception {
+		// TODO Auto-generated method stub
+		return fnamesMapper.findNameById(fnameid);
+	}
+
+	@Override
+	public int updateMainNames(FFamnamesCustom famnamesCustom) throws Exception {
+		// TODO Auto-generated method stub
+		return fnamesMapper.updateMainNames(famnamesCustom);
 	}		
 }

@@ -17,7 +17,7 @@ public interface FdbMapper {
 	 * @ClassName: FdbMapper 
 	 * @Description: TODO
 	 * @author: Administrator
-	 * @date: 2017Äê10ÔÂ10ÈÕ ÏÂÎç4:21:26 
+	 * @date: 2017ï¿½ï¿½10ï¿½ï¿½10ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½4:21:26 
 	 */
 	
 	public int findDBCount(String famtitle) throws Exception;
@@ -31,4 +31,6 @@ public interface FdbMapper {
 	public int findLatestUser()throws Exception;
 	
 	public int addUserInfo(FUserCustom fUserCustom)throws Exception;
+	
+	public FDatabaseCustom findDbById(int databaseid)throws Exception;
 }

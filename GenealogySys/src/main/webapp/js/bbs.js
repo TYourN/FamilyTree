@@ -100,7 +100,7 @@ function getPosts(u){
 function judge(ind){
 	if(ind==1){	
 		$("#readOnly").css("display","block");
-		$("#tie").css("display","none");
+		$("#tie").css("display","block");
 		$("#postRep").css("display","none");
 		$("#tieTitle").attr("readonly","readonly");
 		$("#table_server").bootstrapTable('refresh',{url:'../../fposts/findAllInfo.do'});
@@ -167,7 +167,7 @@ function getDetailInfo(id){
 				count.children("div").eq(3).css("display","block");
 				info.eq(2).children("span").text(result.goodcount);
 				info.eq(3).children("span").text(result.badcount);
-				$("#readOnly").val(result.content);
+				editor.setContent(result.content);
 			}else{				
 				count.children("label").eq(2).css("display","none");
 				count.children("div").eq(2).css("display","none");

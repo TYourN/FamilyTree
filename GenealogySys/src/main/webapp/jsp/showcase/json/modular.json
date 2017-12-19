@@ -1,0 +1,26 @@
+[
+	{
+		"title":"家族论坛",
+		"attr":"forum"
+	},
+	{
+		"title":"家谱制作",
+		"attr":"Genmake"
+	},
+	{	
+		"title":"家谱展示",
+		"attr":"Genshow"
+	},
+	{
+		"title":"家族荣誉",
+		"attr":"fahonors"
+	},
+	{
+		"title":"家族资讯",
+		"attr":"fanews"
+	},
+	{
+		"title":"家族文化",
+		"attr":"culture"
+	}
+]

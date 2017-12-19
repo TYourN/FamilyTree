@@ -2,6 +2,7 @@ package cn.items.mssm.service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import cn.items.mssm.poCustom.FPostsCustom;
 
@@ -53,4 +54,7 @@ public interface FostsService {
 	
 	//发布公告
 	public int addPosts(FPostsCustom fPostsCustom)throws Exception;
+	
+	//查出对应条件的所有帖子信息
+	public List<FPostsCustom> findInfoBy(Map<String,String> map)throws Exception;
 }

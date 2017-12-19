@@ -1,6 +1,7 @@
 package cn.items.mssm.service.Impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -64,5 +65,17 @@ public class FHPServiceImpl implements FhomePageService{
 		// TODO Auto-generated method stub
 		DBContextHolder.setDBType("0");
 		return fHomePageMapper.deleteMianPics(picid);
+	}
+
+	@Override
+	public List<String> findPicsByAu(Map<String, String> map) throws Exception {
+		// TODO Auto-generated method stub
+		return fHomePageMapper.findPicsByAu(map);
+	}
+
+	@Override
+	public int deletePicsByFLag(String flag) throws Exception {
+		// TODO Auto-generated method stub
+		return fHomePageMapper.deletePicsByFLag(flag);
 	}
 }

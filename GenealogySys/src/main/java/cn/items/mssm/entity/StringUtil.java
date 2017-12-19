@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.text.DateFormat;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -100,6 +101,13 @@ public class StringUtil {
 		return time;  	
     }
     
+    //时间格式化
+    public static String changeTime(Date d){
+    	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String s = sdf.format(d);
+		return s;	
+    }
+    
     //判断图片属于哪一页中的哪一类的
     public static Map<String, String> JudgeFlag(int flag){
     	Map<String, String> map=new HashMap<>();
@@ -140,4 +148,100 @@ public class StringUtil {
     	}
 		return list;  	
     }
+    
+    // ","分隔符截取,并拼接html
+    public static String SpliceUrl(String url){
+    	String s="<p>";
+    	String[] sArray=url.split(",");
+    	for(String i:sArray){
+    		s=s+"<img src="+"\""+i+"\""+"/"+">";
+    	}
+    	String surl=s+"</p>";
+		return surl;  	
+    }
+    
+    //拼接html
+    public static String SplicePRUrl(String content,String url){
+    	String s="<img src="+"\""+url+"\""+"/"+">";
+    	content=content+s;
+		return content;   	
+    }
+    
+    //生成对应条件的map
+    public static Map<String, String> checkMap(String Check,String Conditions){
+    	Map<String, String> map=new HashMap<>();
+		if(Check=="in"){
+			map.put("exoducs", Conditions);
+		}else if(Check=="15"){
+			map.put("exoducs", Conditions);
+			map.put("birthstart", "1400");
+			map.put("birthend", "1499");
+		}else if(Check=="16"){
+			map.put("exoducs", Conditions);
+			map.put("birthstart", "1500");
+			map.put("birthend", "1599");
+		}else if(Check=="17"){
+			map.put("exoducs", Conditions);
+			map.put("birthstart", "1600");
+			map.put("birthend", "1699");
+		}else if(Check=="18"){
+			map.put("exoducs", Conditions);
+			map.put("birthstart", "1700");
+			map.put("birthend", "1799");
+		}else if(Check=="19"){
+			map.put("exoducs", Conditions);
+			map.put("birthstart", "1800");
+			map.put("birthend", "1899");
+		}else if(Check=="20"){
+			map.put("exoducs", Conditions);
+			map.put("birthstart", "1900");
+			map.put("birthend", "1999");
+		}else if(Check=="21"){
+			map.put("exoducs", Conditions);
+			map.put("birthstart", "2000");
+			map.put("birthend", "2099");
+		}
+    	return map;   	
+    }
+    
+    //计算两个数的百分比
+    public static String percent(int num1,int num2){
+    	NumberFormat numberFormat = NumberFormat.getInstance();
+    	numberFormat.setMaximumFractionDigits(2);
+    	String result = numberFormat.format((float) num1 / (float) num2 * 100);  
+		return result+"%";   	
+    }
+    
+  //计算两个数的百分比
+    public static String percentNo(int num1,int num2){
+    	NumberFormat numberFormat = NumberFormat.getInstance();
+    	numberFormat.setMaximumFractionDigits(2);
+    	String result = numberFormat.format((float) num1 / (float) num2 * 100);  
+		return result+""; 
+    }
+    
+    //查询年龄段时生成对应的Map
+    public static Map<String, Integer> AgeMap(String type){
+    	Map<String, Integer> map=new HashMap<>();
+    	if(type=="青"){
+    		map.put("ageone",0);
+    		map.put("agetwo",20);
+    	}else if(type=="状"){
+    		map.put("ageone",21);
+    		map.put("agetwo",35);
+    	}else if(type=="中"){
+    		map.put("ageone",36);
+    		map.put("agetwo",50);
+    	}else if(type=="更"){
+    		map.put("ageone",51);
+    		map.put("agetwo",65);
+    	}else if(type=="老"){
+    		map.put("ageone",66);
+    		map.put("agetwo",100);
+    	}else if(type=="死"){
+    		map.put("ageone",101);
+    	}
+		return map;    	
+    }
+    
 }

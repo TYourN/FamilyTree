@@ -262,9 +262,11 @@ function showData(head,screen,content){
 	if(head=="家族荣誉修改"||head=="家族资讯修改"||head=="家族文化修改"){
 		$("#DeMemo").removeAttr("readonly");
 		$("#DeTitle").removeAttr("readonly");
+		$("#doc").css("display","block");
 	}else{
 		$("#DeMemo").attr("readonly","readonly");
 		$("#DeTitle").attr("readonly","readonly");
+		$("#doc").css("display","none");
 	}
 	
 	if(head=="家族资讯详情"||head=="家族资讯修改"){
@@ -276,7 +278,7 @@ function showData(head,screen,content){
 	if(head=="家族文化修改"){
 		$("#stype").css("display","block");
 		$("#pics").css("display","none");
-		
+		$("#doc").css("display","none");
 	}else{
 		$("#pics").css("display","block");
 		$("#stype").css("display","none");
@@ -308,7 +310,7 @@ function showData(head,screen,content){
 	$("#head").css("float","left");
 	$("#head").css("padding-left","41%");
 	$("#detail").css("display","block");
-	$("#doc").css("display","none");
+	
 	close(head);
 }
 
@@ -457,7 +459,6 @@ function updDe(){
 	}else if($("#head").text()=="家族资讯修改"){
 		postUpdate("../../fnews/updateFamNews.do?id=",a[0].id);
 	}else if($("#head").text()=="家族文化修改"){
-		alert($("#ytype").val());
 		postUpdate("../../fcul/updateFamCul.do?id=",a[0].id);
 	}
 }

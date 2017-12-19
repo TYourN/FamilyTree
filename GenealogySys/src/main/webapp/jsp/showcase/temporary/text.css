@@ -1,0 +1,13 @@
+ul,li{
+	margin: 0px;
+	padding: 0px;
+	list-style-type:none;
+}
+
+.right_wrap{
+	width: 1078px;
+	margin: 0px auto;
+	padding: 10px;
+	border: 1px solid #000000;
+}
+

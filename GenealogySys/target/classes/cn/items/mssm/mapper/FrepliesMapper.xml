@@ -10,4 +10,76 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="findAllreplies" resultType="int">
         select count(*) from f_replies 
     </select>
+    
+    <!-- 查询出对应帖子的回复数目 -->
+    <select id="findReNumById" parameterType="int" resultType="int">
+        select count(*) from f_replies where PostId=#{postid}
+    </select>
+    
+    <!-- 查询出对应帖子的主回复（回复的ParentId为0） -->
+    <select id="findPRepliesById" parameterType="int" resultType="FRepliesCustom">
+        select f_replies.*,`Name`,Pic from f_replies,f_userinfo where f_replies.ReplierId=f_userinfo.UserInfoId and f_replies.ParentId=0 and f_replies.PostId=#{postid}
+    </select>
+    
+    <!-- 查询出对应回复的子回复 -->
+    <select id="findCRepliesById" parameterType="Map" resultType="FRepliesCustom">
+        select f_replies.*,`Name`,Pic from f_replies,f_userinfo where f_replies.ReplierId=f_userinfo.UserInfoId and f_replies.ParentId=#{parentid} and f_replies.PostId=#{postid}
+    </select>
+    
+    <!-- 添加一条回复 -->
+     <sql id="Replykey">
+      <trim suffixOverrides=",">
+        <if test="replierid!=null">
+            ReplierId,
+        </if>
+        <if test="postid!=null">
+            PostId,
+        </if>
+        <if test="parentid!=null">
+            ParentId,
+        </if>
+        <if test="content!=null">
+            Content,
+        </if>
+        <if test="createtime!=null">
+            Createtime,
+        </if>
+        <if test="goodcount!=null">
+            GoodCount,
+        </if>
+        <if test="badcount!=null">
+            BadCount,
+        </if>
+      </trim>
+    </sql>
+    
+    <sql id="Replyvalue">
+      <trim suffixOverrides=",">
+        <if test="replierid!=null">
+            #{replierid},
+        </if>
+        <if test="postid!=null">
+            #{postid},
+        </if>
+        <if test="parentid!=null">
+            #{parentid},
+        </if>
+        <if test="content!=null">
+            #{content},
+        </if>
+        <if test="createtime!=null">
+            #{createtime},
+        </if>
+        <if test="goodcount!=null">
+            #{goodcount},
+        </if>
+        <if test="badcount!=null">
+            #{badcount},
+        </if>
+      </trim>
+    </sql>
+    <insert id="addReplies" parameterType="FRepliesCustom">
+        insert into f_replies(<include refid="Replykey"></include>) values(<include refid="Replyvalue"></include>)
+    </insert>
+    
 </mapper>

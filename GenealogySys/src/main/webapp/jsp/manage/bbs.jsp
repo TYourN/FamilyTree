@@ -104,25 +104,6 @@
 						</div>
 					</div>
 				</div>
-				<!-- <div class="panel panel-default"
-					style="margin: 0 0 0 2%; width: 30%; float: left; cursor: pointer;">
-					<div class="panel-body" style="background-color: transparent;">
-						<i class="lnr lnr-users"
-							style="color: #AEB7C2; font-size: 58px; opacity: 0.8; float: left;"></i>
-						<div style="margin: 0 0 0 57px;">
-							<span style="color: #C0C0C0;">论坛在线人数</span>
-							<div>
-								<span style="color: #C0C0C0;">在线人数:</span> <span id="online_per"
-									style="color: #C0C0C0;"></span>
-
-							</div>
-							<div>
-								<span style="color: #C0C0C0;">总人数:</span> <span id="all_per"
-									style="color: #C0C0C0;"></span>
-							</div>
-						</div>
-					</div>
-				</div> -->
 			</div>
 		</div>
 
@@ -194,11 +175,11 @@
 						<div class="form-group">
 							<label for="firstname" class="col-sm-2 control-label">帖子内容:</label>
 							<div class="col-sm-10">
-								<textarea id="readOnly" class="form-control" rows="6"
+								<!-- <textarea id="readOnly" class="form-control" rows="6"
 									style="background-color: #eee; border-color: rgba(144, 130, 130, 0.38);"
-									readonly="readonly"></textarea>
+									readonly="readonly"></textarea> -->
 								<textarea class="am-validate" name="tiecontent"
-									style="display: none" id="tie" required></textarea>
+									style="display: block" id="tie" required></textarea>
 							</div>
 						</div>
 						<div class="form-group">
@@ -240,14 +221,16 @@
 		  	  toolbars:[['source','simpleupload']],
 			  wordCount:true,  
 			  elementPathEnabled:true,
+			  autoHeightEnabled: false,
 			  initialFrameWidth: 618,
 			  initialFrameHeight:150
 			});
 		  	
 		  	var ue=new baidu.editor.ui.Editor({
-		  		toolbars:[['source','bold','indent','italic','underline','subscript','pasteplain','time','deleterow','deletecol','splittorows','splittocols','inserttitle','fontfamily','fontsize','forecolor','lineheight','imagecenter','touppercase','tolowercase']],
+		  		toolbars:[['source','bold','indent','italic','underline','subscript','pasteplain','time','deleterow','deletecol','splittorows','splittocols','inserttitle','fontfamily','fontsize','forecolor','lineheight','imagecenter','touppercase','tolowercase','simpleupload']],
 		  		autoHeightEnabled: false,
 	            autoFloatEnabled: false,
+	            autoHeightEnabled: false,
 	            initialFrameWidth:'99%',
 	            initialFrameHeight:300
 		  	});

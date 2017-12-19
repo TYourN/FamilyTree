@@ -1,0 +1,27 @@
+[
+	{
+		"id": "1",
+		"pId": "0",
+		"name": "UUU",
+		"sex": "male",
+		"spouse": "mmm"
+	}, {
+		"id": "2",
+		"pId": "1",
+		"name": "xxx",
+		"sex": "male",
+		"spouse": "bbb"
+	}, {
+		"id": "3",
+		"pId": "2",
+		"name": "ccc",
+		"sex": "female",
+		"spouse": ""
+	}, {
+		"id": "4",
+		"pId": "1",
+		"name": "LLL",
+		"sex": "male",
+		"spouse": ""
+	}
+]

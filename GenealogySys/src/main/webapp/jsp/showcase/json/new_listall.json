@@ -1,0 +1,76 @@
+{
+	"pages": 10,
+	"locate": [
+		{
+			"attr": "Homepage.jsp",
+			"title": "首页"
+		}, {
+			"attr": "news.jsp",
+			"title": "新闻中心"
+		}
+	],
+	"Content": [
+		{
+			"array": [],
+			"content": "",
+			"memo": "简介AAAAAAAAAAAAAAAAAAAAAAAAAAA",
+			"newsid": 1,
+			"opertime": {
+				"date": 18,
+				"day": 3,
+				"hours": 10,
+				"minutes": 36,
+				"month": 9,
+				"seconds": 31,
+				"time": 1508294191000,
+				"timezoneOffset": -480,
+				"year": 117
+			},
+			"pagenum": 0,
+			"pagesize": 0,
+			"title": "以习近平为核心的党中央推进强军纪实之八",
+			"url": ""
+		},
+		{
+			"array": [],
+			"content": "",
+			"memo": "简介AAAAAAAAAAAAAAAAAAAAAAAAAAA",
+			"newsid": 1,
+			"opertime": {
+				"date": 18,
+				"day": 3,
+				"hours": 10,
+				"minutes": 36,
+				"month": 9,
+				"seconds": 31,
+				"time": 1508294191000,
+				"timezoneOffset": -480,
+				"year": 117
+			},
+			"pagenum": 0,
+			"pagesize": 0,
+			"title": "以习近平为核心的党中央推进强军纪实之八",
+			"url": ""
+		},{
+			"array": [],
+			"content": "",
+			"memo": "简介AAAAAAAAAAAAAAAAAAAAAAAAAAA",
+			"newsid": 1,
+			"opertime": {
+				"date": 18,
+				"day": 3,
+				"hours": 10,
+				"minutes": 36,
+				"month": 9,
+				"seconds": 31,
+				"time": 1508294191000,
+				"timezoneOffset": -480,
+				"year": 117
+			},
+			"pagenum": 0,
+			"pagesize": 0,
+			"title": "以习近平为核心的党中央推进强军纪实之八",
+			"url": ""
+		}
+	]
+}

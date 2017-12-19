@@ -36,8 +36,6 @@
 					style="padding: 4px 20px; margin-right: 10px" onclick="updateDe()">修改</button>
 				<button type="button" class="btn btn-default"
 					style="padding: 4px 20px; margin-right: 10px" onclick="deleteDe()">删除</button>
-				<button type="button" class="btn btn-default"
-					style="padding: 4px 20px; margin-right: 10px; float: right;">批量导入</button>
 				<div style="margin-top: 25px;">
 					<table id="info_server" class="table table-hover table-striped"
 						style="vertical-align: middle !important; text-align: center;">
@@ -137,6 +135,7 @@
   			toolbars:[['source','bold','indent','italic','underline','subscript','pasteplain','time','deleterow','deletecol','splittorows','splittocols','inserttitle','fontfamily','fontsize','forecolor','lineheight','imagecenter','touppercase','tolowercase','simpleupload']],
 	  		wordCount:true,  
 	  		elementPathEnabled:true,
+	  		autoHeightEnabled:false,
 	  		initialFrameWidth: 618,
 	  		initialFrameHeight:200
 		});

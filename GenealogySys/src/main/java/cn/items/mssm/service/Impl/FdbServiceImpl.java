@@ -65,6 +65,12 @@ public class FdbServiceImpl implements FdbService{
 		// TODO Auto-generated method stub
 		return fdbMapper.addManaFirst(fUserinfoCustom);
 	}
+
+	@Override
+	public FDatabaseCustom findDbById(int databaseid) throws Exception {
+		// TODO Auto-generated method stub
+		return fdbMapper.findDbById(databaseid);
+	}
 	
 	
 	

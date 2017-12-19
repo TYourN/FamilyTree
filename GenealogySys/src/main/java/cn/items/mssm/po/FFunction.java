@@ -10,6 +10,8 @@ public class FFunction {
     private String url;
 
     private String memo;
+    
+    private String flag;
 
     public Integer getFuncid() {
         return funcid;
@@ -45,9 +47,17 @@ public class FFunction {
 
     public String getMemo() {
         return memo;
-    }
+    }   
 
-    public void setMemo(String memo) {
+	public void setMemo(String memo) {
         this.memo = memo == null ? null : memo.trim();
     }
+	
+	public String getFlag() {
+		return flag;
+	}
+
+	public void setFlag(String flag) {
+		this.flag = flag == null ? null : flag.trim();
+	}
 }

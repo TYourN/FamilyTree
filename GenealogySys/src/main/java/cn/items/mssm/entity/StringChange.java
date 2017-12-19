@@ -13,7 +13,7 @@ public class StringChange {
 	 */
 	
 	public static List<String> Change(List<String> list){
-		String ip = PropertiesUtil.getProperties("/PicsStore.properties","UeditorImages");
+		String ip = PropertiesUtil.getProperties("/PicsStore.properties","SeparateImages");
 		
 		List<String> l=new ArrayList<String>();
 		for(int i=0;i<list.size();i++){

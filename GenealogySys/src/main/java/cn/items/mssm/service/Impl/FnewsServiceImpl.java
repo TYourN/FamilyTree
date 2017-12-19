@@ -69,16 +69,30 @@ public class FnewsServiceImpl implements FnewsService{
 	@Override
 	public List<FNewsCustom> findFamNews() throws Exception {
 		// TODO Auto-generated method stub
-		List<FNewsCustom> list=fnewsMapper.findFamNews();
-		for(FNewsCustom f:list){
-			f.setUrlList(StringUtil.CutComma(f.getUrl()));
-		}
-		return list;
+		return fnewsMapper.findFamNews();
 	}
 
 	@Override
 	public FNewsCustom findFamNewsDety(int newsid) throws Exception {
 		// TODO Auto-generated method stub
 		return fnewsMapper.findFamNewsDety(newsid);
+	}
+
+	@Override
+	public int updateFamNews(FNewsCustom fNewsCustom) throws Exception {
+		// TODO Auto-generated method stub
+		return fnewsMapper.updateFamNews(fNewsCustom);
+	}
+
+	@Override
+	public List<FFamnewsCustom> findNewsTop() throws Exception {
+		// TODO Auto-generated method stub
+		return fnewsMapper.findNewsTop();
+	}
+
+	@Override
+	public int updateMainNews(FFamnewsCustom famnewsCustom) throws Exception {
+		// TODO Auto-generated method stub
+		return fnewsMapper.updateMainNews(famnewsCustom);
 	}	
 }

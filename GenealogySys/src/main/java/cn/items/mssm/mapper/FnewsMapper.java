@@ -15,6 +15,8 @@ public interface FnewsMapper {
 	 * @date: 2017年10月17日 下午1:53:06 
 	 */
 	
+	public List<FFamnewsCustom> findNewsTop()throws Exception;
+	
 	public List<FFamnewsCustom> findAllNews() throws Exception;
 	
 	public FFamnewsCustom findNewDety(int newsid)throws Exception;
@@ -30,4 +32,8 @@ public interface FnewsMapper {
 	public List<FNewsCustom> findFamNews()throws Exception;
 	
 	public FNewsCustom findFamNewsDety(int newsid)throws Exception;
+	
+	public int updateFamNews(FNewsCustom fNewsCustom) throws Exception;
+	
+	public int updateMainNews(FFamnewsCustom famnewsCustom)throws Exception;
 }

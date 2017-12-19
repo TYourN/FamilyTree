@@ -10,6 +10,36 @@ public class FNewsCustom extends FNews{
 	
 	private String memo;
 	
+	private String name;
+	
+	private Integer id;
+	
+	private String otime;
+	
+	public String getOtime() {
+		return otime;
+	}
+
+	public void setOtime(String otime) {
+		this.otime = otime;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	private List<String> urlList;
 
 	public List<String> getUrlList() {

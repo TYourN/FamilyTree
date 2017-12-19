@@ -1,6 +1,7 @@
 package cn.items.mssm.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import cn.items.mssm.poCustom.FFamnewsCustom;
 import cn.items.mssm.poCustom.FPicturesCustom;
@@ -24,4 +25,8 @@ public interface FhomePageMapper {
 	public int addFSPics(FPicturesCustom fPicturesCustom) throws Exception;	
 	
 	public int deleteMianPics(int picid)throws Exception;
+	
+	public List<String> findPicsByAu(Map<String,String> map)throws Exception;
+	
+	public int deletePicsByFLag(String flag)throws Exception;
 }

@@ -6,8 +6,101 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- #{}表示一个占位符 -->
 <mapper namespace="cn.items.mssm.mapper.FfuncMapper">
     
+    <!-- 获取对应用户所对应的功能 -->
+    <select id="findUserFunc" parameterType="FFunctionCustom" resultType="FFunctionCustom">
+        select f_function.* from f_userrole,f_rolefunc,f_function where f_userrole.RoleId=f_rolefunc.RoleId and f_rolefunc.FuncId=f_function.FuncId and ParentId=#{parentid} and Flag=#{flag} and UserId=#{userid} and f_rolefunc.RoleId=#{roleid}
+    </select>
+    
     <!-- 查找出所有的功能 -->
+    <select id="findAllfunc" resultType="FFunctionCustom">
+        select FuncId,Title from f_function
+    </select>
     
     <!-- 增加一个功能（模块） -->
+    <sql id="FuncInfokey">
+      <trim suffixOverrides=",">
+        <if test="title!=null">
+            Title,
+        </if>
+        <if test="parentid!=null">
+            ParentId,
+        </if>
+        <if test="url!=null">
+            Url,
+        </if>
+        <if test="memo!=null">
+            Memo,
+        </if>
+        <if test="flag!=null">
+            Flag,
+        </if>
+      </trim>
+    </sql>
+    <sql id="FuncInfovalue">
+      <trim suffixOverrides=",">
+        <if test="title!=null">
+            #{title},
+        </if>
+        <if test="parentid!=null">
+            #{parentid},
+        </if>
+        <if test="url!=null">
+            #{url},
+        </if>
+        <if test="memo!=null">
+            #{memo},
+        </if>
+        <if test="flag!=null">
+            #{flag},
+        </if>
+      </trim>
+    </sql>
+    <insert id="addFuncInfo" parameterType="FFunctionCustom">
+        insert into f_function(<include refid="FuncInfokey"></include>) values(<include refid="FuncInfovalue"></include>)
+    </insert>
+    
+    <!-- 获取所有的 父功能模块-->
+    <select id="findParents" resultType="FFunctionCustom">
+        select FuncId,Title from f_function WHERE ParentId=0
+    </select>
+    
+    <!-- 获取对应Id的功能信息 -->
+    <select id="findFuncById" parameterType="int" resultType="FFunctionCustom">
+        select * from f_function where FuncId=#{funcid}
+    </select>
+    
+    <!-- 更新功能数据 -->
+    <update id="updateFunc" parameterType="FFunctionCustom">
+    	update f_function
+    	<set >
+      	<if test="title != null">
+        	Title = #{title,jdbcType=VARCHAR},
+      	</if>
+      	<if test="parentid != null">
+        	ParentId = #{parentid,jdbcType=INTEGER},
+      	</if>
+      	<if test="url != null">
+        	Url = #{url,jdbcType=VARCHAR},
+      	</if>
+      	<if test="memo != null" >
+        	Memo = #{memo,jdbcType=VARCHAR},
+      	</if>
+      	<if test="flag != null" >
+        	Flag = #{flag,jdbcType=VARCHAR},
+      	</if>
+    	</set>
+    	where FuncId = #{funcid,jdbcType=INTEGER}
+  	</update>
+  
+    <!-- 删除一条功能模块 -->
+    <delete id="delFunc" parameterType="int">
+        delete from f_function where FuncId=#{funcid}
+    </delete>
+    
+    <!-- 删除对应父节点下所有的子节点 -->
+    <delete id="delFuncParent" parameterType="int">
+        delete from f_function where ParentId={parentid}
+    </delete>
+    
     
 </mapper>

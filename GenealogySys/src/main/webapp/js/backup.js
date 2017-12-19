@@ -9,6 +9,7 @@ $(document).ready(function(){
 	showChartList();	
 	getChartData();	
 	getAge();
+	getURole();
 })
 
 function showChartList(){
@@ -147,6 +148,53 @@ function getAge(){
 			$("#age_pie_info").children("li").eq(5).children("span").text(result.six);
 			
 			showAgePie(result.list);
+		}
+	})
+}
+
+function backupDB(){
+	$.ajax({
+		type:"POST",
+		contentType:"application/json;charset=UTF-8",
+		url:"../../fdb/backDB.do",
+		dataType:"json",
+		success:function(result){
+			if(result==true){
+				alert("数据库备份成功！！！");
+			}else{
+				alert("数据库备份失败！！！")
+			}
+		}
+	})
+}
+
+function importDB(){
+	$.ajax({
+		type:"POST",
+		contentType:"application/json;charset=UTF-8",
+		url:"../../fdb/importDB.do",
+		dataType:"json",
+		success:function(result){
+			if(result==true){
+				alert("数据库导入成功！！！");
+			}else{
+				alert("数据库导入失败！！！")
+			}
+		}
+	})
+}
+
+function getURole(){
+	$.ajax({
+		type:"POST",
+		url:"../../ffunc/findUserR.do",
+		dataType:"json",
+		success:function(data){
+			if(data.role=="族管理员"){
+				$("#bbutton").css("display","block");
+			}else{
+				$("#bbutton").css("display","none");
+			}
 		}
 	})
 }

@@ -64,7 +64,7 @@ public class DynamicDataSource extends AbstractRoutingDataSource{
         dataSource.setUrl(url);
         dataSource.setUsername(username);
         dataSource.setPassword(password);
-        dataSource.setTestWhileIdle(true);
+        dataSource.setTestWhileIdle(false);
         return dataSource;
     } 
 	

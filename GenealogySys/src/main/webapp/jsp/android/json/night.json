@@ -1,0 +1,10 @@
+{
+	"day":{
+		"font-color":"#000000",
+		"bg-color":"#efeff4"
+	},
+	"night":{
+		"font-color":"#ffffff",
+		"bg-color":"#3E4377"	
+	}
+}

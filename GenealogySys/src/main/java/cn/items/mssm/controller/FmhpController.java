@@ -12,9 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import cn.dynamic.mssm.DBContextHolder;
 import cn.items.mssm.entity.ImgUtil;
@@ -26,7 +24,7 @@ import cn.items.mssm.service.FuserService;
 
 @Controller
 @RequestMapping("/fmhp")
-public class FmhpController {
+public class FmhpController{
 
 	/** 
 	 * @ClassName: FmhpController 
@@ -43,16 +41,17 @@ public class FmhpController {
 	
 	public static PicsSave pics=new PicsSave();
 	
+	/*public static Map<String, Object> usermap=new HashMap<>();*/
+	
 	//查找对应家族的家族简介信息 
 	@SuppressWarnings("unchecked")
 	@ResponseBody
 	@RequestMapping("/findFamPro")
-	public FProfileCustom findFamPro(/*HttpSession session,*/HttpServletResponse res)throws Exception{
+	public FProfileCustom findFamPro(HttpSession session,HttpServletResponse res)throws Exception{
 		DBContextHolder.setDBType("0");
-		/*Map<String,String> map=(Map<String, String>) session.getAttribute("user");
-		FProfileCustom fProfileCustom=fproService.findFamPro(Integer.parseInt(map.get("userid")));*/
+		Map<String, Object> usermap=(Map<String, Object>) session.getAttribute("userinfo");
 		List<Integer> list=new ArrayList<>();
-		FProfileCustom fProfileCustom=fproService.findFamPro(1);
+		FProfileCustom fProfileCustom=fproService.findFamPro(Integer.parseInt(usermap.get("userid").toString()));
 		if(fProfileCustom.getUrl()==null){
 			
 		}else{
@@ -61,8 +60,7 @@ public class FmhpController {
 		}
 		Map<String, Object> cmap=new HashMap<>();
 		cmap.put("title","族人");
-		/*cmap.put("dbid", Integer.parseInt(map.get("serverId")));*/
-		cmap.put("dbid",1);
+		cmap.put("dbid",Integer.parseInt(usermap.get("dbid").toString()));
 		Integer allCount=fuserService.findAllCount(cmap);
 		cmap.put("title","族管理员");
 		Integer manaCount=fuserService.findAllCount(cmap);
@@ -75,14 +73,17 @@ public class FmhpController {
 	
 	
 	//对家族简介信息进行修改 
+	@SuppressWarnings("unchecked")
 	@ResponseBody
 	@RequestMapping("/updateFamPro")
-	public int updateFamPro(@RequestBody Map<String, String> map,HttpServletResponse res)throws Exception{
+	public int updateFamPro(HttpSession session,@RequestBody Map<String, String> map,HttpServletResponse res)throws Exception{
+		Map<String, Object> usermap=(Map<String, Object>) session.getAttribute("userinfo");
 		DBContextHolder.setDBType("0");
 		String url=null;
 		FProfileCustom fProfileCustom=new FProfileCustom();
 		
 		if(map.get("url")!=null){
+			@SuppressWarnings("static-access")
 			String Content=pics.uploadContent(map.get("url"));
 			List<String> list=ImgUtil.getImgName(Content);
 			for(int i=0;i<list.size();i++){
@@ -99,7 +100,7 @@ public class FmhpController {
 		fProfileCustom.setIntroduce(map.get("introduce"));
 		fProfileCustom.setUrl(url);
 		fProfileCustom.setFamlocal(map.get("famlocal"));
-		fProfileCustom.setDbid(1);   //后期修改
+		fProfileCustom.setDbid(Integer.parseInt(usermap.get("dbid").toString()));   //后期修改
 		int flag=fproService.updateFamPro(fProfileCustom);
 		return flag;		
 	}

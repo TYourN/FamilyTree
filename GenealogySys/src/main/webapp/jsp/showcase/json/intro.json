@@ -1,0 +1,32 @@
+[
+	{
+		"title":{
+			"p":"在线编修",
+			"img":"../img/icons/svg/clipboard.svg"
+		},
+		"content":{
+			"p":"简单操作，在线编修。",
+			"img":["../img/gg1.jpg"]
+		}
+	},
+	{
+		"title":{
+			"p":"随时查看",
+			"img":"../img/icons/svg/compas.svg"
+		},
+		"content":{		
+			"p":"一次编修，随时查看",
+			"img":["../img/gg2.jpg","../img/gg3.jpg"]
+		}
+	},
+	{
+		"title":{
+			"p":"家族圈",
+			"img":"../img/icons/svg/chat.svg"
+		},
+		"content":{
+			"p":"家族论坛，家族文化，一应俱全。",
+			"img":["../img/gg4.jpg","../img/gg3.jpg"]
+		}
+	}
+]

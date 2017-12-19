@@ -11,6 +11,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select * from f_cul
     </select>
     
+    <!-- 查找出对应条件的文化 -->
+    <sql id="Base_Column_List" >
+    	CulId, Title, Content, Opertime, Type
+  	</sql>
+  	<select id="findAnCulByType" resultType="FCulCustom" parameterType="Map" >
+  		select
+  		<include refid="Base_Column_List"/>
+  		from f_cul
+  		<where>
+  		    <if test="type!=null and type!=''">
+  		        and Type=#{type}
+  		    </if>
+  		</where>
+  	</select>
+    
+    <!-- 根据Id查找对应的家族文化 -->
+    <select id="findCulById" parameterType="int" resultType="FCulCustom">
+        select * from f_cul where CulId=#{culid}
+    </select>
+    
     <!-- 上传家族文化 -->
     <sql id="Culkey">
       <trim suffixOverrides=",">
@@ -22,6 +42,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </if>
         <if test="opertime!=null">
             Opertime,
+        </if>
+        <if test="type!=null">
+            Type,
         </if>
       </trim>
     </sql>
@@ -37,6 +60,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <if test="opertime!=null">
             #{opertime},
         </if>
+        <if test="type!=null">
+            #{type},
+        </if>
       </trim>
     </sql>
     <insert id="addFamCul" parameterType="FCulCustom">
@@ -50,6 +76,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="title!=null and title!=''">Title=#{title},</if>
             <if test="content!=null and title!=''">Content=#{content},</if>
             <if test="opertime!=null">Opertime=#{opertime},</if>
+            <if test="type!=null">Type=#{type},</if>
         </trim>
         <where>
             <if test="culid!=null and culid!=''">
@@ -58,4 +85,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </where>
     </update>
     
+    <!-- 删除一条家族文化 -->
+    <delete id="deleteFamCul" parameterType="int">
+        delete from f_cul where CulId=#{culid}
+    </delete>
 </mapper>

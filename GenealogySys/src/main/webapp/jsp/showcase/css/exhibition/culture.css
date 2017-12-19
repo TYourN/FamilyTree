@@ -1,0 +1,53 @@
+.right_wrap{
+	width: 1200px;
+	margin: 0px auto;
+}
+
+.tap_sel ul{
+	text-align: center;
+}
+
+.tap_sel ul li{
+	cursor: pointer;
+}
+
+.tap_item{
+	display: inline-block;
+	width: 200px;
+	color: #FFFFFF;
+	padding: 10px 0px;
+	text-align: center;
+}
+
+.tap_item img{
+	width: 50px;
+	height: 50px;
+}
+
+.tap_origin{
+	background-color: #453246;
+}
+
+.tap_train{
+	background-color: #f86254;
+}
+
+.tap_celebrity{
+	background-color: #b04d5d;
+}
+
+.tap_hs{
+	background-color: #ffd05b;
+}
+
+.con_title p{
+	text-align: center;
+	font-size: 24px;
+	border-bottom: 1px solid #000000;
+	margin: 0px;
+}
+
+.con_title small{
+	display: block;
+	text-align: center;
+}

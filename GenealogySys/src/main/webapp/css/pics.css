@@ -1,0 +1,53 @@
+@CHARSET "UTF-8";
+ul li{
+	list-style-type:none;
+}
+
+.panelcolor{
+	border-color:#d9edf7;
+}
+
+.panelcolor > .panel-heading {
+    background-color: #d9edf7;
+	color: #31708f;
+    border-color: #d9edf7;
+}
+
+.img_wrap{
+	width: 860px;
+	overflow: hidden;
+	margin-top: 20px;
+}
+
+.img_wrap ul{
+	display: -webkit-box;
+	margin: 0px;
+	padding: 0px;
+}
+
+.img_wrap ul li{
+	margin-left: 20px;
+	height: 150px;
+	width: 200px;
+	position: relative;
+}
+
+.img_wrap li:first-child{
+	margin-left: 0px;
+}
+.img_wrap ul li img{
+	max-height: 200px;
+	max-width: 200px;
+	bottom: 0px;
+	position: absolute;
+	display: block;
+}
+
+.php_img{
+	max-height: 200px;
+	max-width: 200px;
+}
+
+.inp{
+	display: none !important;
+}

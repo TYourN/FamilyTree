@@ -1,0 +1,237 @@
+.right_wrap{
+	margin-left: 20px;
+	margin-top: 20px;
+}
+
+.control{
+	width: 1198px;
+	height: 50px;
+}
+
+.gen_wrap{
+	padding: 10px;
+	margin-top: 10px;
+	width: 1198px;
+	height: 800px;
+	position: absolute;
+	overflow: auto;
+	margin-bottom: 100px;
+	border: 2px solid #bdc3c7;
+	box-shadow: 0px 0px 2px #bdc3c7;
+}
+
+.gen_wrap li{
+	min-width: 600px;
+	display: block;
+}
+
+.add_item{
+	margin-left: 10px;
+}
+
+.add_item p{
+	display: inline-block;
+	margin: 0px;
+	font-size: 14px;
+	line-height: 20px;
+}
+
+ul li{
+	margin:0px;
+	padding: 0px;
+	list-style-type:none;
+}
+
+.list_item{
+	border-radius: 5px;
+	padding: 3px 8px;
+	display: inline-block;
+	border: 1px solid #999;
+}
+
+.list_item span{
+	font-size: 14px;
+	line-height: 20px;
+	padding: 0px 5px;
+}
+
+.item_input{
+	width: 200px;
+	display: inline-block;
+}
+
+.in_ok{
+	cursor: pointer;
+}
+
+.in_ok:hover{
+	color: #2ecc71;
+}
+
+.list_item p{
+	line-height: 20px;
+	font-size: 16px;
+	display: inline-block;
+	margin: 0px;
+	color: #000000;
+	cursor: pointer;
+}
+
+.item_hide{
+	color: #FFFFFF;
+	background-color: #2ecc71;
+}
+
+.in_main{
+	display: inline-block;
+    color: #FFFFFF;
+    line-height: 20px;
+    height: 20px;
+    width: 20px;
+    border-radius: 10px;
+    text-align: center;
+	background-color: #5ac8d8;
+	margin: 0px 5px;
+	cursor: pointer;
+}
+
+.in_spouse{
+	display: inline-block;
+    color: #FFFFFF;
+    line-height: 20px;
+    height: 20px;
+    width: 20px;
+    border-radius: 10px;
+    text-align: center;
+	background-color: #fd367e;
+	margin: 0px 5px;
+}
+
+.add_i{
+	padding-left: 5px;
+	color: #2ecc71;
+	cursor: pointer;
+}
+
+.de_i{
+	padding-left: 5px;
+	color: #e74c3c;
+	cursor: pointer;
+}
+
+.add_list{
+	padding-left: 5px;
+	color: #3498DB;
+	cursor: pointer;
+}
+
+.gen_wrap li{
+    padding: 10px 5px 0 5px;
+    position: relative;
+    -webkit-padding-start: 40px;
+}
+
+.gen_wrap li::before, .gen_wrap li::after {
+    content:'';
+    left:-20px;
+    position:absolute;
+    right:auto;
+}
+.gen_wrap li::before {
+    border-left:1px solid #999;
+    bottom:50px;
+    height:100%;
+    top:0;
+    width:1px;
+}
+.gen_wrap li::after {
+    border-top:1px solid #999;
+    height:20px;
+    top:25px;
+    width:60px
+}
+
+.gen_wrap>ul{
+	-webkit-padding-start: 20px;
+}
+
+.gen_wrap ul{
+	-webkit-padding-start: 40px;
+}
+
+.gen_wrap>ul>li{
+	-webkit-padding-start: 0px;
+}
+
+.gen_wrap>ul>li::before, .gen_wrap>ul>li::after {
+	width: 0px;
+	height: 0px;
+    border:0;
+}
+
+.gen_wrap li:last-child::before {
+    height:25px
+}
+
+.txt_input{
+	display: none !important;
+}
+
+.mask{
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	background: rgba(0,0,0,0.3);
+	z-index: 3;
+	display: none;
+}
+
+.dele_wrap{
+	width: 300px;
+	background: #FFFFFF;
+	position: fixed;
+	top: 100px;
+	z-index: 4;
+	border-radius: 4px;
+	box-shadow: 8px 0 16px 0 rgba(7,17,27,0.2);
+	padding-bottom: 20px;
+	display: none;
+}
+
+.title_wrap{
+	padding: 10px;
+	height: 50px;
+}
+
+.title_wrap p{
+	display: inline-block;
+	margin: 0px;
+	margin-left: 30px;
+	font-size: 20px;
+	font-weight: 700;
+	line-height: 30px;
+	height: 30px;
+}
+
+.title_wrap span{
+	float: right;
+	margin-right: 10px;
+	line-height: 30px;
+	height: 30px;
+	cursor: pointer;
+}
+
+.c_item{
+	width: 200px;
+	margin: 0px auto;
+}
+
+.mess_btn{
+	text-align: center;
+}
+
+.mess_btn button{
+	margin: 0px 15px;
+}

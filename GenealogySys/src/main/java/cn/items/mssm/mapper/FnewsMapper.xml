@@ -6,14 +6,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- #{}表示一个占位符 -->
 <mapper namespace="cn.items.mssm.mapper.FnewsMapper">
     
+    <!-- 查找出最新的5条新闻信息 -->
+    <select id="findNewsTop" resultType="FFamnewsCustom">
+        select * from f_famnews ORDER BY Opertime DESC LIMIT 0,5
+    </select>
+    
     <!-- 查找出所有的新闻信息 -->
     <select id="findAllNews" resultType="FFamnewsCustom">
-        select NewsId,Title,Opertime,Memo from f_famnews ORDER BY Opertime DESC
+        select NewsId,Title,Opertime,Memo,Url from f_famnews ORDER BY Opertime DESC
     </select>
     
     <!-- 查询出一条新闻的具体内容 -->
     <select id="findNewDety" parameterType="int" resultType="FFamnewsCustom">
-        select Title,Content,Opertime from f_famnews where NewsId=#{newsid}
+        select * from f_famnews where NewsId=#{newsid}
     </select>
     
     <!-- 主页插入一条新闻的内容 -->
@@ -62,27 +67,34 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <!-- 删除一条主页新闻信息 -->
     <delete id="deleteMainNews" parameterType="int">
-        delete from f_famnews 
+        delete from f_famnews where NewsId=#{newsid}
+    </delete>
+    
+    <!-- 更新主页的新闻信息 -->
+    <update id="updateMainNews" parameterType="FFamnewsCustom">
+        update f_famnews
+        <trim prefix="set" suffixOverrides=",">
+            <if test="title!=null and title!=''">Title=#{title},</if>
+            <if test="content!=null and title!=''">Content=#{content},</if>
+            <if test="opertime!=null and opertime!=''">Opertime=#{opertime},</if>
+            <if test="url!=null and url!=''">Url=#{url},</if>
+            <if test="memo!=null and memo!=''">Memo=#{memo},</if>
+        </trim>
         <where>
             <if test="newsid!=null and newsid!=''">
                 and NewsId=#{newsid}
             </if>
         </where>
-    </delete>
+    </update>
     
     <!-- 查询出所有的家族新闻 -->
     <select id="findFamNews" resultType="FNewsCustom">
-        select * from f_news
+        select f_news.*,Name from f_news,f_userinfo where f_news.OperId=f_userinfo.UserInfoId ORDER BY Opertime DESC
     </select>
     
     <!-- 根据Id查找出家族新闻的具体信息 -->
     <select id="findFamNewsDety" parameterType="int" resultType="FNewsCustom">
-        select Title,Content,Opertime from f_news 
-        <where>
-            <if test="newsid!=null and newsid!=''">
-                and NewsId=#{newsid}
-            </if>
-        </where>
+        select Title,Content,Opertime,Memo,Url,Name from f_news,f_userinfo where f_news.OperId=f_userinfo.UserInfoId and NewsId=#{newsid}
     </select>
     
     <!-- 增加一条对应家族的新闻信息 -->
@@ -137,11 +149,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <!-- 删除一条对应家族的新闻信息 -->
     <delete id="deleteFamNews" parameterType="int">
-        delete from f_news
+        delete from f_news where NewsId=#{newsid}
+    </delete>
+    
+    <!-- 更新一条对应家族的新闻信息 -->
+    <update id="updateFamNews" parameterType="FNewsCustom">
+        update f_news
+        <trim prefix="set" suffixOverrides=",">
+            <if test="title!=null and title!=''">Title=#{title},</if>
+            <if test="content!=null and title!=''">Content=#{content},</if>
+            <if test="operid!=null">OperId=#{operid},</if>
+            <if test="opertime!=null">Opertime=#{opertime},</if>
+            <if test="url!=null and url!=''">Url=#{url},</if>
+            <if test="memo!=null and memo!=''">Memo=#{memo},</if>
+        </trim>
         <where>
             <if test="newsid!=null and newsid!=''">
                 and NewsId=#{newsid}
             </if>
         </where>
-    </delete>
+    </update>
 </mapper>

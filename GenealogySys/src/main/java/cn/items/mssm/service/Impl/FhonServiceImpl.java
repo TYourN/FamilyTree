@@ -1,6 +1,7 @@
 package cn.items.mssm.service.Impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,7 +30,7 @@ public class FhonServiceImpl implements FhonService{
 	}
 
 	@Override
-	public List<FHonCustom> findHonDety(int honid) throws Exception {
+	public FHonCustom findHonDety(int honid) throws Exception {
 		// TODO Auto-generated method stub
 		return fhonMapper.findHonDety(honid);
 	}
@@ -44,6 +45,24 @@ public class FhonServiceImpl implements FhonService{
 	public int deleteFamHon(int honid) throws Exception {
 		// TODO Auto-generated method stub
 		return fhonMapper.deleteFamHon(honid);
+	}
+
+	@Override
+	public List<FHonCustom> findAllHon() throws Exception {
+		// TODO Auto-generated method stub
+		return fhonMapper.findAllHon();
+	}
+
+	@Override
+	public int updateFamHon(FHonCustom fHonCustom) throws Exception {
+		// TODO Auto-generated method stub
+		return fhonMapper.updateFamHon(fHonCustom);
+	}
+
+	@Override
+	public List<FHonCustom> findSomeHon(Map<String, String> map) throws Exception {
+		// TODO Auto-generated method stub
+		return fhonMapper.findSomeHon(map);
 	}
 		
 }

@@ -6,19 +6,40 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- #{}表示一个占位符 -->
 <mapper namespace="cn.items.mssm.mapper.FhonMapper">
     
-    <!-- 读取对应家族的荣誉 -->
+    <!-- 读取对应家族的荣誉:展示端 -->
     <select id="findFamHon" resultType="FHonCustom">
         select HonId,Url from f_hon
     </select>
     
-    <!-- 根据Id读取对应家族的荣誉文字信息 -->
-    <select id="findHonDety" parameterType="int" resultType="FHonCustom">
-        select Title,Content from f_hon 
+    <!-- 读取对应家族的荣誉:管理端-->
+    <select id="findAllHon" resultType="FHonCustom">
+        select Title,HonId,`Name`,Opertime from f_hon,f_userinfo where f_hon.OperId=f_userinfo.UserInfoId ORDER BY Opertime DESC
+    </select>
+    
+    <!-- 有条件的读取家族荣誉 -->
+    <sql id="Base_Column_List" >
+    	HonId, Title, Content, OperId, Opertime, Url
+  	</sql>
+    <select id="findSomeHon" parameterType="Map" resultType="FHonCustom">
+        select 
+        <include refid="Base_Column_List" />
+        from f_hon
         <where>
-            <if test="honid!=null and honid!=''">
-                and HonId=#{honid}
+            <if test="content!=null and content!=''">
+                and Content like CONCAT('%',#{content},'%') 
+            </if>
+            <if test="starttime!=null and starttime!=''">
+                and Opertime &gt;=#{starttime}
+            </if>
+            <if test="endtime!=null and endtime!=''">
+                and Opertime &lt;=#{endtime}
             </if>
         </where>
+    </select>
+    
+    <!-- 根据Id读取对应家族的荣誉文字信息 -->
+    <select id="findHonDety" parameterType="int" resultType="FHonCustom">
+        select Title,Content,Url,`Name`,Opertime from f_hon,f_userinfo where f_hon.OperId=f_userinfo.UserInfoId and HonId=#{honid}
     </select>
     
     <!-- 增加对应家族荣誉 -->
@@ -68,11 +89,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <!-- 删除对应Id的对应家族的荣誉 -->
     <delete id="deleteFamHon" parameterType="int">
-        delete from f_hon
+        delete from f_hon where HonId=#{honid}
+    </delete>
+    
+    <!-- 更新对应Id的对应家族的荣誉 -->
+    <update id="updateFamHon" parameterType="FHonCustom">
+        update f_hon
+        <trim prefix="set" suffixOverrides=",">
+            <if test="title!=null and title!=''">Title=#{title},</if>
+            <if test="content!=null and title!=''">Content=#{content},</if>
+            <if test="operid!=null">OperId=#{operid},</if>
+            <if test="opertime!=null">Opertime=#{opertime},</if>
+            <if test="url!=null and url!=''">Url=#{url},</if>
+        </trim>
         <where>
             <if test="honid!=null and honid!=''">
                 and HonId=#{honid}
             </if>
         </where>
-    </delete>
+    </update>
 </mapper>

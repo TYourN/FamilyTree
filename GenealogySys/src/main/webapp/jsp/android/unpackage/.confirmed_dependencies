@@ -1,0 +1,110 @@
+{
+  "index.html": {
+    "resources": [
+      "img/user.jpg",
+      "css/index.css",
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "js/index.js",
+      "img/culture_2.png",
+      "img/honor_2.png",
+      "img/tree_2.png",
+      "img/forum_2.png",
+      "img/sroll2.jpg",
+      "js/jquery-3.1.0.js",
+      "img/sroll1.jpg",
+      "forum.html",
+      "js/jquery.mobile.custom.min.js",
+      "json/news.json",
+      "img/temporary/10.jpg",
+      "img/temporary/3.jpg",
+      "img/temporary/2.jpg",
+      "img/temporary/11.jpg",
+      "honor.html",
+      "personal.html"
+    ],
+    "refer": [
+      "forum.html",
+      "honor.html",
+      "personal.html"
+    ]
+  },
+  "forum.html": {
+    "resources": [
+      "js/forum.js",
+      "js/jquery.mobile.custom.min.js",
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "js/jquery-3.1.0.js",
+      "css/forum.css",
+      "index.html",
+      "fonts/mui.ttf",
+      "css/font-awesome.css",
+      "json/forum_list.json",
+      "fonts/fontawesome-webfont.ttf",
+      "js/iscroll.js",
+      "img/temporary/arrow.png",
+      "js/pullToRefresh.js",
+      "img/temporary/loader.png",
+      "forum_item.html"
+    ],
+    "refer": [
+      "index.html",
+      "forum_item.html"
+    ]
+  },
+  "forum_item.html": {
+    "resources": [
+      "js/forum_item.js",
+      "css/font-awesome.css",
+      "css/mui.min.css",
+      "css/forum_item.css",
+      "forum.html",
+      "json/forum_item.json",
+      "img/Screenshot_2017-11-09-20-42-35.png",
+      "js/jquery.mobile.custom.min.js",
+      "js/mui.min.js",
+      "js/iscroll.js",
+      "js/jquery-3.1.0.js",
+      "js/pullToRefresh.js",
+      "img/culture.png"
+    ],
+    "refer": [
+      "forum.html"
+    ]
+  },
+  "honor.html": {
+    "resources": [
+      "json/honor_list.json",
+      "js/jquery.mobile.custom.min.js",
+      "css/font-awesome.css",
+      "js/mui.min.js",
+      "js/honor.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "css/honor.css",
+      "js/jquery-3.1.0.js",
+      "fonts/fontawesome-webfont.ttf"
+    ]
+  },
+  "personal.html": {
+    "resources": [
+      "json/person_bg.json",
+      "js/jquery.mobile.custom.min.js",
+      "css/font-awesome.css",
+      "js/mui.min.js",
+      "js/personal.js",
+      "fonts/mui.ttf",
+      "css/personal.css",
+      "css/mui.min.css",
+      "js/jquery.adaptive-backgrounds.js",
+      "js/jquery-3.1.0.js",
+      "fonts/fontawesome-webfont.ttf",
+      "index.html",
+      "img/temporary/90.jpg"
+    ],
+    "refer": [
+      "index.html"
+    ]
+  }
+}

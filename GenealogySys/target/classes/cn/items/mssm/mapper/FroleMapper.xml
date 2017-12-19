@@ -11,9 +11,39 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select * from f_role 
     </select>
     
+    <!-- 根据Id查找角色信息 -->
+    <select id="findRInfoById" parameterType="int" resultType="FRoleCustom">
+        select * from f_role where RoleId=#{roleid}
+    </select>
+    
+    <!-- 查找对应名称的角色Id -->
+    <select id="findRIdByName" parameterType="String" resultType="int">
+        select RoleId from f_role where Title=#{title}
+    </select>
+    
     <!-- 增加角色信息 -->
+    <sql id="RoleInfokey">
+      <trim suffixOverrides=",">
+        <if test="title!=null">
+            Title,
+        </if>
+        <if test="memo!=null">
+            Memo,
+        </if>
+      </trim>
+    </sql>
+    <sql id="RoleInfovalue">
+      <trim suffixOverrides=",">
+        <if test="title!=null">
+            #{title},
+        </if>
+        <if test="memo!=null">
+            #{memo},
+        </if>
+      </trim>
+    </sql>
     <insert id="addRoleInfo" parameterType="FRoleCustom">
-        insert into f_role(?,?) values(#{title},#{memo})
+        insert into f_role(<include refid="RoleInfokey"></include>) values(<include refid="RoleInfovalue"></include>)
     </insert>
     
     <!-- 修改角色信息 -->
@@ -35,6 +65,44 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         delete from f_role where RoleId=#{roleid}
     </delete>
     
+    <!-- 获取对应角色的功能 -->
+    <select id="findRFunc" parameterType="int" resultType="FRolefuncCustom">
+        select * from f_rolefunc where RoleId=#{roleid}
+    </select>
     
+    <!-- 删除对应角色Id的角色功能 -->
+    <delete id="delRFunc" parameterType="int">
+        delete from f_rolefunc where RoleId=#{roleid}
+    </delete>
     
+    <!-- 添加对应角色Id的角色功能  -->
+    <sql id="Rfunckey">
+      <trim suffixOverrides=",">
+        <if test="roleid!=null">
+            RoleId,
+        </if>
+        <if test="funcid!=null">
+            FuncId,
+        </if>
+      </trim>
+    </sql>
+    
+    <sql id="Rfuncvalue">
+      <trim suffixOverrides=",">
+        <if test="roleid!=null">
+            #{roleid},
+        </if>
+        <if test="funcid!=null">
+            #{funcid},
+        </if>
+      </trim>
+    </sql>
+    <insert id="addRFunc" parameterType="FRolefuncCustom">
+        insert into f_rolefunc(<include refid="Rfunckey"></include>) values(<include refid="Rfuncvalue"></include>)
+    </insert>
+    
+    <!-- 获取用户对应的角色 -->
+    <select id="findUserRoleTitle" parameterType="int" resultType="FRoleCustom">
+        select f_role.RoleId,f_role.Title from f_role,f_userrole where f_role.RoleId=f_userrole.RoleId and UserId=#{userid}
+    </select>
 </mapper>

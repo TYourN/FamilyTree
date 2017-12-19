@@ -1,9 +1,10 @@
 $(document).ready(function(){
 	show();
-	
+	getUserDetail();
+	getURole();
 	$.ajax({
-		url:"../json/function.json",
-	    type:"GET",
+		url:"../../ffunc/findUserFunc.do",
+		type:"POST",
 	   	dataType:"json",
 	   	success:function(json){
 	   		$("#main-left").append(
@@ -14,7 +15,7 @@ $(document).ready(function(){
 	   			if(json[i].children.length==0){	   				
 	   			    $("#main-left").append(
 	   			    	'<li><a style="cursor:pointer" class="" href="#'+json[i].attr+'"><div style="display:none">'+json[i].attr+'</div><i class="'+json[i].memo+'"></i> <span>'+json[i].text+'</span></a></li>'
-	   			    )
+	   			    )	   			    
 	   			}else{
 	   				$("#main-left").append(
 	   					'<li><a id="list" style="cursor:pointer" class=""><div style="display:none">'+json[i].attr+'</div><i class="'+json[i].memo+'"></i> <span>'+json[i].text+'</span><i class="icon-submenu lnr lnr-chevron-down" style="padding-left:35px;"></i></a>'+
@@ -23,7 +24,7 @@ $(document).ready(function(){
 	   				);
 	   				for(var j=0;j<json[i].children.length;j++){
 	   					$("#main-child").append(
-	   						'<li id="child"><a style="cursor:pointer" class="" href="#'+json[i].children[j].attr+'"><div style="display:none">'+json[i].children[j].attr+'</div><i class=""></i> <span>'+json[i].children[j].text+'</span></a></li>'
+	   						'<li id="child"><a style="cursor:pointer" class="" href="#'+json[i].children[j].url+'"><div style="display:none">'+json[i].children[j].url+'</div><i class=""></i> <span>'+json[i].children[j].title+'</span></a></li>'
 	   					)	   					
 	   				}
 	   			}	   			
@@ -103,29 +104,8 @@ function HTMLLoad(o){
     	}
 }
 
-function limitWord(){
-	var maxwidth=30;
-	var max=10;
-	var text=$("#content").text();
-	var t=$("#famPosition").text();
-	if($("#content").text().length>maxwidth){
-        $("#content").text($("#content").text().substring(0,maxwidth));
-        $("#content").html($("#content").html()+"..."+"<a id='more' style='cursor:pointer'>查看详情</a>");//如果字数超过最大字数，超出部分用...代替，并且在后面加上点击展开的链接；
-    };
-    $("#content").find("a").popover({
-    	theme:'success',
-    	content:text
-    })
-    
-    if($("#famPosition").text().length>max){
-    	$("#famPosition").text($("#famPosition").text().substring(0,max));
-        $("#famPosition").html($("#famPosition").html()+"..."+"<a id='mo' style='cursor:pointer'>详情</a>");
-    }
-    
-    $("#famPosition").find("a").popover({
-    	theme:'success',
-    	content:t
-    })
+function logout(){
+	location.href="../login.jsp";
 }
 
 function getHeadInfo(){
@@ -134,6 +114,7 @@ function getHeadInfo(){
 		url:"../../fmhp/findFamPro.do",
 		dataType:"json",
 		success:function(data){
+			$("#FName").text(data.fulname);
 			var head=$("#HeadInfo").children(".profile-main");
 			var count=$("#HeadInfo").children(".profile-stat").children(".row").children("div");
 			var detInfo=$("#detailInfo").children(".profile-info");
@@ -159,6 +140,31 @@ function getHeadInfo(){
 			limitWord();
 		}
 	})
+}
+
+function limitWord(){
+	var maxwidth=30;
+	var max=10;
+	var text=$("#content").text();
+	var t=$("#famPosition").text();
+	if($("#content").text().length>maxwidth){
+        $("#content").text($("#content").text().substring(0,maxwidth));
+        $("#content").html($("#content").html()+"..."+"<a id='more' style='cursor:pointer'>查看详情</a>");//如果字数超过最大字数，超出部分用...代替，并且在后面加上点击展开的链接；
+    };
+    $("#content").find("a").popover({
+    	theme:'success',
+    	content:text
+    })
+    
+    if($("#famPosition").text().length>max){
+    	$("#famPosition").text($("#famPosition").text().substring(0,max));
+        $("#famPosition").html($("#famPosition").html()+"..."+"<a id='mo' style='cursor:pointer'>详情</a>");
+    }
+    
+    $("#famPosition").find("a").popover({
+    	theme:'success',
+    	content:t
+    })
 }
 
 function popuper(data){
@@ -246,7 +252,41 @@ function show(){
 	  toolbars:[['source','simpleupload']],
 	  wordCount:false,  
 	  elementPathEnabled:false,
+	  autoHeightEnabled: false,
 	  initialFrameWidth: 618,
 	  initialFrameHeight:150
 	});
 } 
+
+function getUserDetail(){
+	$.ajax({
+		type:"POST",
+		contentType:"application/json;charset=UTF-8",
+		url:"../../fuser/findUserDetail.do",
+		dataType:"json",
+		success:function(result){
+			$("#userDetail").append(
+				'<img src="'+result.pic+'" class="img-circle"><span style="font-size:large;">'+result.name+'</span><i class="icon-submenu lnr lnr-chevron-down"></i>'
+			)
+		}
+	})
+}
+
+function getURole(){
+	$.ajax({
+		type:"POST",
+		url:"../../ffunc/findUserR.do",
+		dataType:"json",
+		success:function(data){
+			if(data.role=="族管理员"){
+				$("#upFam").css("display","block");
+				$("#morepost").css("display","block");
+				$("#moreuser").css("display","block");
+			}else{
+				$("#upFam").css("display","none");
+				$("#morepost").css("display","none");
+				$("#moreuser").css("display","none");
+			}
+		}
+	})
+}

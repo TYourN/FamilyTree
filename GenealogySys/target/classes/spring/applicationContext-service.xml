@@ -33,5 +33,13 @@
     <bean id="FhonService" class="cn.items.mssm.service.Impl.FhonServiceImpl"></bean>
     <!-- 对应家族文化的service -->
     <bean id="FculService" class="cn.items.mssm.service.Impl.FculServiceImpl"></bean>
-    
+    <!-- 对应家族简介的service -->
+    <bean id="FproService" class="cn.items.mssm.service.Impl.FproServiceImpl"></bean>
+    <!-- 对应家族公告的service -->
+    <bean id="FostsService" class="cn.items.mssm.service.Impl.FostsServiceImpl"></bean>
+    <!-- 对应家族公告的service -->
+    <bean id="FrepliesService" class="cn.items.mssm.service.Impl.FrepliesServiceImpl"></bean>
+	<!-- 对应家族公告的service -->
+    <bean id="FnodeService" class="cn.items.mssm.service.Impl.FnodeServiceImpl"></bean>
+
 </beans>

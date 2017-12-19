@@ -20,6 +20,8 @@ public class FPosts {
     private Integer goodcount;
 
     private Integer badcount;
+    
+    private String type;
 
     public Integer getPostid() {
         return postid;
@@ -92,4 +94,13 @@ public class FPosts {
     public void setBadcount(Integer badcount) {
         this.badcount = badcount;
     }
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type == null ? null : type.trim();
+	}
+      
 }

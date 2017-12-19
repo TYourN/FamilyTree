@@ -46,14 +46,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select PostId,Title,Type,CreateTime from f_posts WHERE Type='水贴' ORDER BY CreateTime DESC
     </select>
     
-    <!-- 查找出所有的水贴相关信息 -->
+    <!-- 查找出所有的公告相关信息 -->
     <select id="findAllReportsInfo" resultType="FPostsCustom">
         select PostId,Title,Type,CreateTime from f_posts WHERE Type='公告' ORDER BY CreateTime DESC
     </select>
     
+    <!-- 查出对应条件的所有帖子信息 -->
+    <select id="findInfoBy" parameterType="Map" resultType="FPostsCustom">
+        select f_posts.PostId,f_posts.Title,f_posts.Content,f_posts.CreateTime,f_posts.Type,f_userinfo.Name from f_posts,f_userinfo
+        <where>
+            <if test="type!=null and type!=''">
+                and Type=#{type}
+            </if>
+        </where>
+        ORDER BY f_posts.PostId DESC
+    </select>
+    
     <!-- 查找出对应id的公告或水贴的信息 -->
     <select id="findDetialById" parameterType="int" resultType="FPostsCustom">
-        select Title,Content,`Name`,Type,CreateTime,GoodCount,BadCount from f_userinfo,f_posts where f_userinfo.UserInfoId=f_posts.PosterId and PostId=#{postid}
+        select Title,Content,`Name`,Pic,Type,CreateTime,GoodCount,BadCount from f_userinfo,f_posts where f_userinfo.UserInfoId=f_posts.PosterId and PostId=#{postid}
     </select>
     
     <!-- 删除一条对应的水贴或者公告 -->

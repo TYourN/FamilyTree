@@ -2,6 +2,7 @@ package cn.items.mssm.mapper;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import cn.items.mssm.poCustom.FPostsCustom;
 
@@ -40,4 +41,6 @@ public interface FostsMapper {
 	public int updateRepById(FPostsCustom fPostsCustom)throws Exception;
 	
 	public int addPosts(FPostsCustom fPostsCustom)throws Exception;
+	
+	public List<FPostsCustom> findInfoBy(Map<String,String> map)throws Exception;
 }

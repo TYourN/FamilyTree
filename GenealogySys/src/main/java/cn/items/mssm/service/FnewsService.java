@@ -14,6 +14,8 @@ public interface FnewsService {
 	 * @author: Administrator   
 	 * @date: 2017年10月17日 下午2:06:16 
 	 */
+	//查找出最新的5条新闻信息
+	public List<FFamnewsCustom> findNewsTop()throws Exception;
 	
 	//查找出所有的新闻信息:主
 	public List<FFamnewsCustom> findAllNews() throws Exception;
@@ -38,4 +40,11 @@ public interface FnewsService {
 	
 	//删除一条对应家族的新闻信息
 	public int deleteFamNews(int newsid)throws Exception;
+	
+	//更新一条对应家族的新闻信息 
+	public int updateFamNews(FNewsCustom fNewsCustom) throws Exception;
+	
+	//更新主页的新闻信息
+	public int updateMainNews(FFamnewsCustom famnewsCustom)throws Exception;
+	
 }

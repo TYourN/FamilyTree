@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import cn.dynamic.mssm.DBContextHolder;
 import cn.items.mssm.mapper.FroleMapper;
 import cn.items.mssm.poCustom.FRoleCustom;
+import cn.items.mssm.poCustom.FRolefuncCustom;
 import cn.items.mssm.service.FroleService;
 
 @Service("FroleService")
@@ -49,6 +50,42 @@ public class FroleServiceImpl implements FroleService{
 		// TODO Auto-generated method stub
 		DBContextHolder.setDBType("0");
 		return froleMapper.findRoleInfo();
+	}
+
+	@Override
+	public FRoleCustom findRInfoById(int roleid) throws Exception {
+		// TODO Auto-generated method stub
+		return froleMapper.findRInfoById(roleid);
+	}
+
+	@Override
+	public List<FRolefuncCustom> findRFunc(int roleid) throws Exception {
+		// TODO Auto-generated method stub
+		return froleMapper.findRFunc(roleid);
+	}
+
+	@Override
+	public int delRFunc(int roleid) throws Exception {
+		// TODO Auto-generated method stub
+		return froleMapper.delRFunc(roleid);
+	}
+
+	@Override
+	public int addRFunc(FRolefuncCustom fRolefuncCustom) throws Exception {
+		// TODO Auto-generated method stub
+		return froleMapper.addRFunc(fRolefuncCustom);
+	}
+
+	@Override
+	public int findRIdByName(String title) throws Exception {
+		// TODO Auto-generated method stub
+		return froleMapper.findRIdByName(title);
+	}
+
+	@Override
+	public List<FRoleCustom> findUserRoleTitle(int userid) throws Exception {
+		// TODO Auto-generated method stub
+		return froleMapper.findUserRoleTitle(userid);
 	}
 	
 	

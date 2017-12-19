@@ -6,14 +6,126 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- #{}表示一个占位符 -->
 <mapper namespace="cn.items.mssm.mapper.FuserMapper">
     
+    <!-- 判断主库中族人信息是否存在 -->
+    <select id="findUserE" parameterType="FUserCustom" resultType="FUserCustom">
+        select *,count(*) as num from f_user 
+        <where>
+            <if test="username!=null and username!=''">
+                and UserName=#{username}
+            </if>
+            <if test="password!=null and password!=''">
+                and PassWord=#{password}
+            </if>
+        </where>
+    </select>
+    
+    <!-- 判断是否是管理员登录 -->
+    <select id="findAdminE" parameterType="FAdminCustom" resultType="FAdminCustom">
+    	select *,count(*) as num from f_admin
+    	<where>
+            <if test="username!=null and username!=''">
+                and UserName=#{username}
+            </if>
+            <if test="password!=null and password!=''">
+                and PassWord=#{password}
+            </if>
+        </where>
+    </select>
+    
+    <!-- 获取对应Id的用户基本信息 -->
+    <select id="findUserById" parameterType="int" resultType="FUserCustom">
+        select * from f_user where UserId=#{userid}
+    </select>
+    
     <!-- 判断族人信息是否存在 -->
     <select id="findUserExit" parameterType="FUserinfoCustom" resultType="int">
         select count(*) from f_userinfo where UserName=#{username} and PassWord=#{password}
     </select>
     
     <!-- 管理员增加族人的信息：从 -->
-    <insert id="addUserInfo" parameterType="FUserinfoCustom">
-        insert into f_userinfo(?,?,?,?) values(#{username},#{password},#{phone},#{identity})
+    <sql id="UserInfokey">
+      <trim suffixOverrides=",">
+        <if test="username!=null">
+            UserName,
+        </if>
+        <if test="password!=null">
+            PassWord,
+        </if>
+        <if test="name!=null">
+            Name,
+        </if>
+        <if test="pic!=null">
+            Pic,
+        </if>
+        <if test="address!=null">
+            Address,
+        </if>
+        <if test="birth!=null">
+            Birth,
+        </if>
+        <if test="age!=null">
+            Age,
+        </if>
+        <if test="sex!=null">
+            Sex,
+        </if>
+        <if test="marriage!=null">
+            Marriage,
+        </if>
+        <if test="phone!=null">
+            Phone,
+        </if>
+        <if test="identity!=null">
+            Identity,
+        </if>
+        <if test="exoducs!=null">
+            Exoducs,
+        </if>
+      </trim>
+    </sql>
+    
+    <sql id="UserInfovalue">
+      <trim suffixOverrides=",">
+        <if test="username!=null">
+            #{username},
+        </if>
+        <if test="password!=null">
+            #{password},
+        </if>
+        <if test="name!=null">
+            #{name},
+        </if>
+        <if test="pic!=null">
+            #{pic},
+        </if>
+        <if test="address!=null">
+            #{address},
+        </if>
+        <if test="birth!=null">
+            #{birth},
+        </if>
+        <if test="age!=null">
+            #{age},
+        </if>
+        <if test="sex!=null">
+            #{sex},
+        </if>
+        <if test="marriage!=null">
+            #{marriage},
+        </if>
+        <if test="phone!=null">
+            #{phone},
+        </if>
+        <if test="identity!=null">
+            #{identity},
+        </if>
+        <if test="exoducs!=null">
+            #{exoducs},
+        </if>
+      </trim>
+    </sql>
+    <insert id="addUserInfo" parameterType="FUserinfoCustom">       
+        insert into f_userinfo(<include refid="UserInfokey"></include>) values(<include refid="UserInfovalue"></include>)
     </insert>
     
     <!-- 增加族人信息之后找到增加信息的Id：从 -->
@@ -21,9 +133,47 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select UserInfoId from f_userinfo ORDER BY UserInfoId DESC LIMIT 0,1
     </select>
     
+    <!-- 增加族人信息之后找到增加信息的Id：主 -->
+    <select id="findLatestUser" resultType="int">
+        select UserId from f_user ORDER BY UserId DESC LIMIT 0,1
+    </select>
+    
     <!-- 管理员增加族人的登录信息：主 -->
+     <sql id="Userkey">
+      <trim suffixOverrides=",">
+        <if test="username!=null">
+            UserName,
+        </if>
+        <if test="password!=null">
+            PassWord,
+        </if>
+        <if test="dbid!=null">
+            DBId,
+        </if>
+        <if test="userinfoid!=null">
+            UserInfoId,
+        </if>
+      </trim>
+    </sql>
+    
+    <sql id="Uservalue">
+      <trim suffixOverrides=",">
+        <if test="username!=null">
+            #{username},
+        </if>
+        <if test="password!=null">
+            #{password},
+        </if>
+        <if test="dbid!=null">
+            #{dbid},
+        </if>
+        <if test="userinfoid!=null">
+            #{userinfoid},
+        </if>
+      </trim>
+    </sql>
     <insert id="addUser" parameterType="FUserCustom">
-        insert into f_user(?,?,?,?) values(#{username},#{password},#{dbid},#{userinfoid})
+        insert into f_user(<include refid="Userkey"></include>) values(<include refid="Uservalue"></include>)
     </insert>
     
     <!-- 修改族人的所有 个人信息：从-->
@@ -56,7 +206,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
              <if test="password!=null and password!=''">PassWord=#{password},</if>
          </trim>
          <where>
-             <if test="userinfoid!=null and userinfoid!=''">
+             <if test="userid!=null and userid!=''">
                  and UserId=#{userid}
              </if>
          </where>
@@ -64,7 +214,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <!-- 管理员删除族人:主 -->
     <delete id="deleteUser" parameterType="int">
-        delete from f_user where UserId=#{userid}
+        delete from f_user where UserInfoId=#{userinfoid}
     </delete>
     
     <!-- 管理员删除族人：从 -->
@@ -72,6 +222,111 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         delete from f_userinfo where UserInfoId=#{userinfoid}
     </delete>
     
+    <!-- 查找出对应家族的所有对应身份的人的人数 -->
+    <select id="findAllCount" parameterType="Map" resultType="int">
+        SELECT count(*) from f_user,f_userrole,f_role where f_user.UserId=f_userrole.UserId and f_userrole.RoleId=f_role.RoleId and f_role.Title=#{title} and DBId=#{dbid}
+    </select>
     
+    <!-- 查找出所有的族人人数 -->
+    <select id="findFamCount" resultType="int">
+        select count(*) from f_userinfo
+    </select>
+
+    <!-- 查找出对应年代对应迁离情况的 族人人数-->
+    <select id="findExCount" parameterType="Map" resultType="int">
+        select count(*) from f_userinfo
+        <where>
+            <if test="exoducs!=null and exoducs!=''">
+                and Exoducs=#{exoducs}
+            </if>
+            <if test="birthstart!=null and birthstart!=''">
+                and Birth &gt;=#{birthstart}
+            </if>
+            <if test="birthend!=null and birthend!=''">
+                and Birth &lt;=#{birthend}
+            </if>
+        </where> 
+    </select>
     
+    <!-- 获取家族人员中男女的数量-->
+    <select id="findFamSex" parameterType="Map" resultType="int">
+        select count(*) from f_userinfo
+        <where>
+            <if test="sex!=null and sex!=''">
+                and Sex=#{sex}
+            </if>
+        </where>
+    </select> 
+    
+    <!-- 查找家族中不同年龄段的人的数量 -->
+    <select id="findFamAge" parameterType="Map" resultType="int">
+        select count(*) from f_userinfo
+        <where>
+            <if test="ageone!=null and ageone!=''">
+                and Age &gt;=#{ageone}
+            </if>
+            <if test="agetwo!=null and agetwo!=''">
+                and Age &lt;=#{agetwo}
+            </if>
+        </where>
+    </select>
+    
+    <!-- 获取族人的基本信息 -->
+    <select id="findAllperson" resultType="FUserinfoCustom">
+        select UserInfoId,UserName,`Name` FROM f_userinfo 
+    </select>
+    
+    <!-- 查询对应ID的族人的信息 -->
+    <select id="findpersonById" parameterType="int" resultType="FUserinfoCustom">
+        select * from f_userinfo where UserInfoId=#{userinfoid}
+    </select>
+    
+    <!-- 获取到对应用户的所有角色 -->
+    <select id="findURole" parameterType="int" resultType="FUserroleCustom">
+        select RoleId from f_userrole where UserId=#{userid}
+    </select>
+    
+    <!-- 删除对应用户Id的用户角色 -->
+    <delete id="delURole" parameterType="int">
+        delete from f_userrole where UserId=#{userid}
+    </delete>
+    
+    <!-- 添加对应用户Id的用户角色 -->
+    <sql id="Urolekey">
+      <trim suffixOverrides=",">
+        <if test="userid!=null">
+            UserId,
+        </if>
+        <if test="roleid!=null">
+            RoleId,
+        </if>
+      </trim>
+    </sql>
+    
+    <sql id="Urolevalue">
+      <trim suffixOverrides=",">
+        <if test="userid!=null">
+            #{userid},
+        </if>
+        <if test="roleid!=null">
+            #{roleid},
+        </if>
+      </trim>
+    </sql>
+    <insert id="addURole" parameterType="FUserroleCustom">
+        insert into f_userrole(<include refid="Urolekey"></include>) values(<include refid="Urolevalue"></include>)
+    </insert>
+    
+    <!-- 在主库中获取到对应条件的用户Id -->
+    <select id="findUserIdByAu" parameterType="Map" resultType="int">
+        select UserId from f_user
+        <where>
+            <if test="dbid!=null and dbid!=''">
+                and DBId=#{dbid}
+            </if>
+            <if test="userinfoid!=null and userinfoid!=''">
+                and UserInfoId=#{userinfoid}
+            </if>
+        </where>
+    </select>
 </mapper>

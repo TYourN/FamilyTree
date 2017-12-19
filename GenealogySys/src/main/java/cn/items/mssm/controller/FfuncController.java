@@ -1,5 +1,6 @@
 package cn.items.mssm.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +22,7 @@ import cn.dynamic.mssm.DBContextHolder;
 import cn.items.mssm.poCustom.FFunctionCustom;
 import cn.items.mssm.poCustom.FRoleCustom;
 import cn.items.mssm.service.FfuncService;
+import cn.items.mssm.service.FroleService;
 
 @Controller
 @RequestMapping("/ffunc")
@@ -35,6 +37,87 @@ public class FfuncController {
 	
 	@Resource
 	private FfuncService ffuncService;
+	
+	@Resource
+	private FroleService froleService;
+	
+	/*private static Map<String, Object> usermap=new HashMap<>();*/
+	
+	//获取对应用户所对应的功能:管理端
+	@SuppressWarnings("unchecked")
+	@ResponseBody
+	@RequestMapping("/findUserFunc")
+	public List<Map<String, Object>> findUserFunc(HttpSession session,HttpServletResponse res)throws Exception{
+		DBContextHolder.setDBType("0");
+		Map<String, Object> usermap=(Map<String, Object>) session.getAttribute("userinfo");
+		int roleid=0;
+		List<Map<String, Object>> list=new ArrayList<>();
+		List<FRoleCustom> rlist=froleService.findUserRoleTitle(Integer.parseInt(usermap.get("userid").toString()));
+		for(int i=0;i<rlist.size();i++){
+			if((rlist.get(i).getTitle()).equals("族人")){
+				roleid=rlist.get(i).getRoleid();
+			}else if((rlist.get(i).getTitle()).equals("族管理员")){
+				roleid=rlist.get(i).getRoleid();
+				break;
+			}else if((rlist.get(i).getTitle()).equals("模块管理员")){
+				roleid=rlist.get(i).getRoleid();
+				break;
+			}
+		}
+		FFunctionCustom fFunctionCustom=new FFunctionCustom();
+		fFunctionCustom.setParentid(0);
+		fFunctionCustom.setFlag("管理");
+		fFunctionCustom.setUserid(Integer.parseInt(usermap.get("userid").toString()));
+		fFunctionCustom.setRoleid(roleid);
+		List<FFunctionCustom> parentList=ffuncService.findUserFunc(fFunctionCustom);
+		for(int i=0;i<parentList.size();i++){
+			Map<String, Object> funcmap=new HashMap<>();
+			funcmap.put("id",parentList.get(i).getFuncid());
+			funcmap.put("text",parentList.get(i).getTitle());
+			funcmap.put("memo",parentList.get(i).getMemo());
+			if(parentList.get(i).getUrl()==null){
+				funcmap.put("attr","");
+			}else{
+				funcmap.put("attr",parentList.get(i).getUrl());	
+			}					
+			
+			FFunctionCustom f=new FFunctionCustom();
+			f.setParentid(parentList.get(i).getFuncid());
+			f.setFlag("管理");
+			f.setUserid(Integer.parseInt(usermap.get("userid").toString()));
+			f.setRoleid(roleid);
+			List<FFunctionCustom> childList=ffuncService.findUserFunc(f);
+			
+			funcmap.put("children",childList);
+			list.add(funcmap);
+		}		
+		return list;		
+	}
+	
+	//获取用户的角色
+	@SuppressWarnings("unchecked")
+	@ResponseBody
+	@RequestMapping("/findUserR")
+	public Map<String,Object> findUserR(HttpSession session,HttpServletResponse res)throws Exception{
+		DBContextHolder.setDBType("0");
+		String role=null;
+		Map<String, Object> usermap=(Map<String, Object>) session.getAttribute("userinfo");
+		List<FRoleCustom> rlist=froleService.findUserRoleTitle(Integer.parseInt(usermap.get("userid").toString()));
+		for(int i=0;i<rlist.size();i++){
+			if((rlist.get(i).getTitle()).equals("族人")){
+				role=rlist.get(i).getTitle();
+			}else if((rlist.get(i).getTitle()).equals("族管理员")){
+				role=rlist.get(i).getTitle();
+				break;
+			}else if((rlist.get(i).getTitle()).equals("模块管理员")){
+				role=rlist.get(i).getTitle();
+				break;
+			}
+		}
+		Map<String,Object> m=new HashMap<>();
+		m.put("role",role);
+		return m;		
+	}
 	
 	//查找出所有的功能
 	@ResponseBody

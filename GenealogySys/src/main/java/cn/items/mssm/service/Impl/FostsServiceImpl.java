@@ -2,6 +2,7 @@ package cn.items.mssm.service.Impl;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -99,6 +100,12 @@ public class FostsServiceImpl implements FostsService{
 	public int addPosts(FPostsCustom fPostsCustom) throws Exception {
 		// TODO Auto-generated method stub
 		return fostsMapper.addPosts(fPostsCustom);
+	}
+
+	@Override
+	public List<FPostsCustom> findInfoBy(Map<String, String> map) throws Exception {
+		// TODO Auto-generated method stub
+		return fostsMapper.findInfoBy(map);
 	}
 	
 	

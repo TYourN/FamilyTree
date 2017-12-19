@@ -10,6 +10,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select count(*) as num from f_database where FamTitle like CONCAT('%',#{famtitle},'%')
     </select>
     
+    <!-- 获取对应Id的数据库信息 -->
+    <select id="findDbById" parameterType="int" resultType="FDatabaseCustom">
+        select * from f_database where DatabaseId=#{databaseid}
+    </select>
+    
     <!-- 插入家族的数据库信息 ：主-->
     <sql id="DBkey">
       <trim suffixOverrides=",">
