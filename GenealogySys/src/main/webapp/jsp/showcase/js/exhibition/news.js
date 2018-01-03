@@ -34,10 +34,9 @@ $(function(){
 	var page = 1;
 	function getlist(url,data){
 		$.ajax({
-			type:"get",
-			url:url,
+			type:"post",
+			url:url+data,
 			async:true,
-			data:data,
 			success:function(data){
 				if($(".tcdPageCode").data("already")=="unfinished"){
 					$(".tcdPageCode").createPage({
@@ -60,7 +59,7 @@ $(function(){
 			}
 		});
 	}
-	getlist("",page);
+	getlist("../../../fnews/findNewsAll.do?pages=",page);
 	
 	function getdom(data){
 		var data = {
@@ -82,6 +81,6 @@ $(function(){
 		}else{
 			page = $(this).html();
 		}
-		getlist("",page);
+		getlist("../../../fnews/findNewsAll.do?pages=",page);
 	})
 })

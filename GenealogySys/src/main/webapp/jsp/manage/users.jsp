@@ -16,6 +16,7 @@
 	<script src="${pageContext.request.contextPath}/vendor/bootstrap/js/bootstrap-table.js"></script>
 	<script src="${pageContext.request.contextPath}/vendor/bootstrap/js/bootstrap-table-zh-CN.js"></script>
 	<script src="${pageContext.request.contextPath}/js/person.js"></script>
+	
 	<script type="text/javascript" charset="utf-8" src="${pageContext.request.contextPath}/ueditor/ueditor.config.js"></script>
 	<script type="text/javascript" charset="utf-8" src="${pageContext.request.contextPath}/ueditor/ueditor.all.min.js"></script>
 	<script type="text/javascript" charset="utf-8" src="${pageContext.request.contextPath}/ueditor/lang/zh-cn/zh-cn.js"></script>

@@ -134,7 +134,7 @@
 									<div class="custom-tabs-line tabs-line-bottom left-aligned">
 										<ul class="nav" role="tablist">
 											<li class="active"><a href="#tab-bottom-left1" role="tab" data-toggle="tab" onclick="queryReportsTop()">家族公告</a></li>
-											<li><a href="#tab-bottom-left2" role="tab" data-toggle="tab">管理人员<span class="badge" style="margin: 0 0 2px 8px;">1</span></a></li>
+											<!-- <li><a href="#tab-bottom-left2" role="tab" data-toggle="tab">管理人员<span class="badge" style="margin: 0 0 2px 8px;">1</span></a></li> -->
 										</ul>						
 									</div>
 									<div class="tab-content">
@@ -143,14 +143,14 @@
 											</ul>	
 											<div id="morepost" class="text-center" style="margin-top: 88px;"><a onclick="pathload()" class="btn btn-default">查看更多</a></div>
 										</div>
-										<div class="tab-pane fade" id="tab-bottom-left2">
+										<!-- <div class="tab-pane fade" id="tab-bottom-left2">
 											<div class="table-responsive">
 												<table class="table project-table">
 													
 												</table>
 											</div>
 											<div id="moreuser" class="text-center" style="margin-top: 88px;"><a href="#" class="btn btn-default">查看所有</a></div>
-										</div>
+										</div> -->
 									</div>
 								</div>
 							</div>

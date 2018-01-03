@@ -8,7 +8,7 @@ public class FFunctionCustom extends FFunction{
 	
 	private Integer userid;
 	
-	private Integer roleid;
+	private Integer roleid;	
 
 	public Integer getRoleid() {
 		return roleid;

@@ -8,6 +8,20 @@ $(document).ready(function(){
 		success:function(data){
 		}
 	})
+	
+	$("#upSql").click(function(){
+		$.ajax({
+			url:"../fdb/importDB.do",
+			type:"get",
+			success:function(data){
+				if(data==true){
+					alert("数据库导入成功！！！");
+				}else{
+					alert("导入失败！！！")
+				}
+			}
+		})
+	})
 })
 
 function UserLogin(){
@@ -23,13 +37,13 @@ function UserLogin(){
 			type:"post",
 			success:function(data){
 				if(data==1){
-					location.href="manage/index.jsp";
+					location.href="manage/index.jsp";					
 				}else if(data==0){
 					alert("登录失败,请核对用户名和密码是否正确！！！");
 				}else if(data==2){
 					alert("登录失败,数据库出现问题。请联系管理员！！！");
 				}else if(data==3){
-					alert("登录失败,数据库缺失！！！");
+					$('#myModal').modal('show');
 				}else if(data==4){
 					location.href="manage/admin.jsp"
 				}
@@ -37,4 +51,6 @@ function UserLogin(){
 		}
 		$("#userInfo").ajaxSubmit(options);
 	}	
+	
+	
 }

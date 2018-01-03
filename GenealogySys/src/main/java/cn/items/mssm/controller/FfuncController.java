@@ -126,14 +126,25 @@ public class FfuncController {
 		DBContextHolder.setDBType("0");
 		PageHelper.startPage(pageNumber, pageSize);
 		Map<String, Object> map=new HashMap<>();
+		List<Map<String,Object>> mlist=new ArrayList<>();
 		List<FFunctionCustom> list=ffuncService.findAllfunc();
 		for(int i=0;i<list.size();i++){
 			list.get(i).setId(list.get(i).getFuncid());
+			Map<String,Object> m=new HashMap<>();
+			m.put("id",list.get(i).getId());
+			m.put("title",list.get(i).getTitle());
+			m.put("ParentId",list.get(i).getParentid());
+			if(list.get(i).getParentid()==0){
+				m.put("Level",1);
+			}else{
+				m.put("Level",2);
+			}
+			mlist.add(m);
 		}
 		PageInfo<FFunctionCustom> pageInfo=new PageInfo<FFunctionCustom>(list);
 		long total=pageInfo.getTotal();
 		map.put("page",pageNumber);
-		map.put("rows",list);
+		map.put("rows",mlist);
 		map.put("total", total);
 		return map;	
 	}

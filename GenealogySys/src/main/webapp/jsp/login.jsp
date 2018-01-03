@@ -17,9 +17,10 @@
 <!-- ICONS -->
 <link rel="apple-touch-icon" sizes="76x76" href="${pageContext.request.contextPath}/img/apple-icon.png">
 <link rel="icon" type="image/png" sizes="96x96" href="${pageContext.request.contextPath}/img/favicon.png">
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.8.3.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/vendor/jquery/jquery.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/login.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-form.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/vendor/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<!-- WRAPPER -->
@@ -45,12 +46,12 @@
 								<div class="form-group clearfix">
 									<label class="fancy-checkbox element-left">
 										<input type="checkbox">
-										<span>记住我</span>
+										
 									</label>
 								</div>
 								<button type="button" class="btn btn-primary btn-lg btn-block" onclick="UserLogin()">登录</button>
 								<div class="bottom">
-									<span class="helper-text"><i class="fa fa-lock"></i> <a href="#">忘记密码?</a></span>
+									<span class="helper-text"></span>
 								</div>
 							</form>
 						</div>
@@ -64,5 +65,25 @@
 		</div>
 	</div>
 	<!-- END WRAPPER -->
+
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">×</button>
+					<h4 class="modal-title" id="myModalLabel">"登录失败,数据库缺失！！！"</h4>
+				</div>
+				<div class="modal-body">确认上传本地数据库？</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" id="upSql">确认上传</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+					</button>				
+				</div>
+			</div>			
+		</div>		
+	</div>
+	
 </body>
 </html>

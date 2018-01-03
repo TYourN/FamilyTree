@@ -13,7 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <!-- 查找出所有的功能 -->
     <select id="findAllfunc" resultType="FFunctionCustom">
-        select FuncId,Title from f_function
+        select * from f_function
     </select>
     
     <!-- 增加一个功能（模块） -->
@@ -101,6 +101,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <delete id="delFuncParent" parameterType="int">
         delete from f_function where ParentId={parentid}
     </delete>
-    
     
 </mapper>

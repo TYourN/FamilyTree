@@ -55,6 +55,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="findInfoBy" parameterType="Map" resultType="FPostsCustom">
         select f_posts.PostId,f_posts.Title,f_posts.Content,f_posts.CreateTime,f_posts.Type,f_userinfo.Name from f_posts,f_userinfo
         <where>
+            f_posts.PosterId=f_userinfo.UserInfoId
             <if test="type!=null and type!=''">
                 and Type=#{type}
             </if>

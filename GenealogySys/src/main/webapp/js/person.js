@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	getUserInfo();
 	getRFInfo("#roles_server","../../frole/findRoleInfo.do");
-	getRFInfo("#funcs_server","../../ffunc/findAllfunc.do");
+	getFInfo("#funcs_server","../../ffunc/findAllfunc.do");
 	getParent();
 	
 	$("#excelfile").change(function(){
@@ -116,6 +116,99 @@ function getUserInfo(){
 }
 
 function getRFInfo(id,url){
+	var t = $(id).bootstrapTable({  
+        url:url, 
+        method: 'get',  
+        dataType: "json",  
+        striped: true,//设置为 true 会有隔行变色效果  
+        undefinedText: "空",//当数据为 undefined 时显示的字符  
+        pagination: true, //分页  
+        // paginationLoop:true,//设置为 true 启用分页条无限循环的功能。  
+        showToggle: false,//是否显示 切换试图（table/card）按钮  
+        showColumns: false,//是否显示 内容列下拉框  
+        pageNumber: 1,//如果设置了分页，首页页码  
+        //showPaginationSwitch:false,//是否显示 数据条数选择框  
+        pageSize: 12,//如果设置了分页，页面数据条数  
+        pageList: [5],  //如果设置了分页，设置可供选择的页面数据条数。设置为All 则显示所有记录。  
+        paginationPreText: '‹',//指定分页条中上一页按钮的图标或文字,这里是<  
+        paginationNextText: '›',//指定分页条中下一页按钮的图标或文字,这里是>  
+        singleSelect: false,//设置True 将禁止多选  
+        search: false, //显示搜索框  
+        data_local: "zh-US",//表格汉化  
+        sidePagination: "server", //服务端处理分页  
+        queryParams:function queryParams(params){
+        	var param = {    
+                    pageNumber: params.pageNumber,    
+                    pageSize: params.pageSize
+            };    
+            return param;
+        },
+        queryParamsType: "undefined",
+        idField: "id",//指定主键列  
+        columns: [  
+            {  
+                field: '',//json数据中rows数组中的属性名  
+                checkbox:true,
+                align: 'center',//水平居中  
+                valign:'middle',
+                width: 50    
+            },  
+            {  
+                title: '标题',  
+                field: 'title',  
+                align: 'center',
+                width: 260
+            }
+        ]  
+    });  
+  
+    
+    t.on('load-success.bs.table', function (data) {//table加载成功后的监听函数  
+    	$(".pull-left").css("display", "none");
+        $(".pull-right").css("display", "block");
+        $("input[name='btSelectAll']").parent("div").parent("th").css("padding-left","0px");
+    });
+    
+    if(id=="#roles_server"){
+    	t.on('click-row.bs.table',function(e,row,ele){
+    		$(ele).parent("tbody").children("tr").each(function(){
+        		if($(this).index()!=$(ele).index()){
+        			if($(this).index()%2==0){
+        				$(this).css("background-color","#f9f9f9");
+        			}else{
+        				$(this).css("background-color","#ffffff");
+        			}       			
+        		}
+        	})
+        	if($(ele).css("background-color")=="rgb(249, 202, 202)"){
+        		clearFuncC();
+        		if($(ele).index()%2==0){
+    				$(ele).css("background-color","#f9f9f9");
+    			}else{
+    				$(ele).css("background-color","#ffffff");
+    			}        		
+        	}else{
+        		clearFuncC();
+        		$(ele).css("background-color","#f9caca");
+        		findRoleF(row.id);
+        	}
+    	})
+    }else{
+    	t.on('click-row.bs.table',function(e,row,ele){
+        	if($(ele).css("background-color")=="rgb(249, 202, 202)"){
+        		if($(ele).index()%2==0){
+    				$(ele).css("background-color","#f9f9f9");
+    			}else{
+    				$(ele).css("background-color","#ffffff");
+    			}        		
+        	}else{
+        		$(ele).css("background-color","#f9caca");
+        	}
+    	})
+    }
+}
+
+function getFInfo(id,url){
 	var t = $(id).bootstrapTable({  
         url:url, 
         method: 'get',  
